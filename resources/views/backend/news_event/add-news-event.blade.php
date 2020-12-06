@@ -36,7 +36,7 @@
               <div class="card-header">
                     <h3>
                         Add News & Event
-                        <a class="btn btn-success float-right btn-sm"  href="{{ route('news_events.view') }}"><i class="fa fa-list"></i>News & Event List</a>
+                        <a class="btn btn-success float-right btn-sm"  href="{{ route('news_events.view') }}"><i class="fa fa-list"></i> News & Event List</a>
                     </h3>
               </div><!-- /.card-header -->
               <div class="card-body">

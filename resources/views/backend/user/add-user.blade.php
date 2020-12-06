@@ -88,72 +88,64 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-
-
-
-
+  
   <script>
-$(function () {
-  $('#myForm').validate({
-    rules: {
-      name: {
-        required: true,
-      },
-      usertype: {
-        required: true,
-      },
-      email: {
-        required: true,
-        email: true,
-      },
-      password: {
-        required: true,
-        minlength: 6
-      },
-       password2: {
-        required: true,
-        equalTo: '#password'
-      },
+    $(function () {
+      $('#myForm').validate({
+        rules: {
+          name: {
+            required: true,
+          },
+          usertype: {
+            required: true,
+          },
+          email: {
+            required: true,
+            email: true,
+          },
+          password: {
+            required: true,
+            minlength: 6
+          },
+          password2: {
+            required: true,
+            equalTo: '#password'
+          },
 
-    },
-    messages: {
-      name: {
-        required: "Please enter the User Name",
-      },
-      usertype: {
-        required: "Please select a User Role",
-      },
-      email: {
-        required: "Please enter a email address",
-        email: "Please enter a vaild email address"
-      },
-      password: {
-        required: "Please provide a password",
-        minlength: "Your password must be at least 6 characters long"
-      },
-       password2: {
-        required: "Please enter confirm password",
-        equalTo: "Confirm password dose not match"
-      },
+        },
+        messages: {
+          name: {
+            required: "Please enter the User Name",
+          },
+          usertype: {
+            required: "Please select a User Role",
+          },
+          email: {
+            required: "Please enter a email address",
+            email: "Please enter a vaild email address"
+          },
+          password: {
+            required: "Please provide a password",
+            minlength: "Your password must be at least 6 characters long"
+          },
+          password2: {
+            required: "Please enter confirm password",
+            equalTo: "Confirm password dose not match"
+          },
 
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.form-group').append(error);
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass('is-invalid');
-    }
-  });
-});
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+    });
 </script>
-
-
-
-
 @endsection

@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
     {
         App\User::create([
             'usertype' => 'admin',
-            'name' => 'moshiur rahman',
+            'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'mobile' => '01749302454',
             'address' => 'dhaka bangladesh',
