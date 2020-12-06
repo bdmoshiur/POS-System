@@ -10,12 +10,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Manage Supplier </h1>
+            <h1 class="m-0 text-dark">Manage Customer </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Supplier</li>
+              <li class="breadcrumb-item active">Customer</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -35,32 +35,32 @@
             <div class="card">
               <div class="card-header">
                     <h3>
-                        Add Supplier
-                        <a class="btn btn-success float-right btn-sm"  href="{{ route('suppliers.view') }}"><i class="fa fa-list"></i> Supplier List</a>
+                        Edit Customer
+                        <a class="btn btn-success float-right btn-sm"  href="{{ route('customers.view') }}"><i class="fa fa-list"></i> Customer List</a>
                     </h3>
               </div><!-- /.card-header -->
               <div class="card-body">
-                <form action="{{ route('suppliers.store') }}" method="post" id="myForm" enctype="multipart/form-data">
+                <form action="{{ route('customers.update',$editData->id) }}" method="post" id="myForm" enctype="multipart/form-data">
                     @csrf
                     <div class="form-row">
                     <div class="form-group col-md-6">
                          <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" >
+                        <input type="text" class="form-control" name="name" value="{{ $editData->name }}" >
                     </div>
                     <div class="form-group col-md-6">
                          <label for="mobile_no">Mobile</label>
-                        <input type="number" class="form-control" name="mobile_no" >
+                        <input type="number" class="form-control" name="mobile_no" value="{{ $editData->mobile_no }}">
                     </div>
                     <div class="form-group col-md-6">
                          <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" >
+                        <input type="email" class="form-control" name="email" value="{{ $editData->email }}">
                     </div>
                     <div class="form-group col-md-6">
                          <label for="address">Address</label>
-                        <input type="text" class="form-control" name="address" >
+                        <input type="text" class="form-control" name="address" value="{{ $editData->address }}">
                     </div>
                     <div class="form-group col-md-6" style="padding-top: 30px">
-                        <input type="submit" class="btn btn-primary" value="Submit" >
+                        <input type="submit" class="btn btn-primary" value="Update" >
                     </div>
                    </div>
                 </form>

@@ -10,12 +10,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Manage Suppliers </h1>
+            <h1 class="m-0 text-dark">Manage Supplier </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Suppliers</li>
+              <li class="breadcrumb-item active">Supplier</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -36,7 +36,7 @@
               <div class="card-header">
                     <h3>
                         Edit Supplier
-                        <a class="btn btn-success float-right btn-sm"  href="{{ route('suppliers.view') }}"><i class="fa fa-list"></i> Suppliers List</a>
+                        <a class="btn btn-success float-right btn-sm"  href="{{ route('suppliers.view') }}"><i class="fa fa-list"></i> Supplier List</a>
                     </h3>
               </div><!-- /.card-header -->
               <div class="card-body">
