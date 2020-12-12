@@ -76,7 +76,7 @@ Route::prefix('customers')->group(function () {
         
         });
 
-           // Categories Route
+           // Products Route
            Route::prefix('products')->group(function () {
             Route::get('/view', 'Backend\ProductController@view')->name('products.view');
             Route::get('/add', 'Backend\ProductController@add')->name('products.add');
@@ -84,6 +84,17 @@ Route::prefix('customers')->group(function () {
             Route::get('/edit/{id}', 'Backend\ProductController@edit')->name('products.edit');
             Route::post('/update/{id}', 'Backend\ProductController@update')->name('products.update');
             Route::get('/delete/{id}', 'Backend\ProductController@delete')->name('products.delete');
+        });
+
+
+         // Purchase Route
+         Route::prefix('purchase')->group(function () {
+            Route::get('/view', 'Backend\PurchaseController@view')->name('purchase.view');
+            Route::get('/add', 'Backend\PurchaseController@add')->name('purchase.add');
+            Route::post('/store', 'Backend\PurchaseController@store')->name('purchase.store');
+            Route::get('/edit/{id}', 'Backend\PurchaseController@edit')->name('purchase.edit');
+            Route::post('/update/{id}', 'Backend\PurchaseController@update')->name('purchase.update');
+            Route::get('/delete/{id}', 'Backend\PurchaseController@delete')->name('purchase.delete');
         });
 
 
