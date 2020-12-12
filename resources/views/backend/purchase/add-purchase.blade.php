@@ -50,24 +50,24 @@
                          <input type="text" class="form-control" name="purchase_no" id="purchase_no">
                     </div>
                     <div class="form-group col-md-4">
-                         <label for="supplier_id">Supplier Name</label>
+                         <label>Supplier Name</label>
                          <select name="supplier_id" id="supplier_id" class="form-control">
-                            <option value="">---Select Supplier---</option>
+                            <option value="">Select Supplier</option>
                             @foreach($suppliers as $supplier)
                             <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
                             @endforeach
                          </select>
                     </div>
                     <div class="form-group col-md-4">
-                         <label for="category_id">Category Name</label>
+                         <label>Category Name</label>
                          <select name="category_id" id="category_id" class="form-control">
-                            <option value="">---Select Category---</option>
+                            <option value="">Select Category</option>
                          </select>
                     </div>
                     <div class="form-group col-md-6">
-                         <label for="category_id">Product Name</label>
-                         <select name="category_id" id="category_id" class="form-control">
-                            <option value="">---Select Product---</option>
+                         <label>Product Name</label>
+                         <select name="product_id" id="product_id" class="form-control">
+                            <option value="">Select Product</option>
                          </select>
                     </div>
                     <div class="form-group col-md-2" style="padding-top: 30px">
@@ -85,6 +85,27 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <script type="text/javascript">
+  $(function(){
+    $(document).on('change','#supplier_id',function(){
+      var supplier_id = $(this).val();
+      $.ajax({
+        url:"{{route('get-category')}}",
+        type: "GET",
+        data:{supplier_id:supplier_id},
+        success:function(data){
+          var html = '<option value="">Select Category</option>';
+          $.each(data,function(key,v){
+            html +='<option value="'+v.category_id+'">'+v.category.name+'</option>';
+          });
+          $('#category_id').html(html);
+        }
+      });
+    });
+  });
+</script>
+
 
 <script>
     $(function () {
@@ -123,25 +144,6 @@
     });
 </script>
 
-<script type="text/javascript">
-  $(function(){
-    $(document).on('change','supplier_id',function(){
-      var supplier_id = $(this).val();
-      $.ajax({
-        url:"{{ route('get_category')}}",
-        type: "GET",
-        data:{supplier_id:supplier_id},
-        success:function(data){
-          var html = '<option value="">Select Category</option>';
-          $.each(data,function(key,v){
-            html +='<option value="'+v.category_id+'">'+v.category_id+'</option>';
-          });
-          $('#category_id').html(html);
-        }
-      });
-    });
-  });
-</script>
 
 <script>
         $('.datepicker').datepicker({

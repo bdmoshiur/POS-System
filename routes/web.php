@@ -97,6 +97,8 @@ Route::prefix('customers')->group(function () {
             Route::get('/delete/{id}', 'Backend\PurchaseController@delete')->name('purchase.delete');
         });
 
+        Route::get('/get-category','Backend\DefaultController@getCategory')->name('get-category');
+
 
 
 });
