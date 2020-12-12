@@ -35,20 +35,47 @@
             <div class="card">
               <div class="card-header">
                     <h3>
-                        Add Product
+                        Edit Product
                         <a class="btn btn-success float-right btn-sm"  href="{{ route('products.view') }}"><i class="fa fa-list"></i> Product List</a>
                     </h3>
               </div><!-- /.card-header -->
               <div class="card-body">
-                <form action="{{ route('products.store') }}" method="post" id="myForm" enctype="multipart/form-data">
+                <form action="{{ route('products.update',$editData->id) }}" method="post" id="myForm" enctype="multipart/form-data">
                     @csrf
                     <div class="form-row">
                     <div class="form-group col-md-6">
+                         <label for="supplier_id">Supplier Name</label>
+                         <select name="supplier_id" class="form-control">
+                            <option value="">---Select Supplier---</option>
+                            @foreach($suppliers as $supplier)
+                            <option value="{{ $supplier->id }}" {{ ($editData->supplier_id == $supplier->id)? "Selected":" "}}>{{ $supplier->name }}</option>
+                            @endforeach
+                         </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                         <label for="category_id">Category Name</label>
+                         <select name="category_id" class="form-control">
+                            <option value="">---Select Category---</option>
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{($editData->category_id == $category->id)? "Selected": " "}}>{{ $category->name }}</option>
+                            @endforeach
+                         </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                         <label for="unit_id">Unit Name</label>
+                         <select name="unit_id" class="form-control">
+                            <option value="">---Select Unit---</option>
+                            @foreach($units as $unit)
+                            <option value="{{ $unit->id }}" {{ ($editData->unit_id == $unit->id)?"Selected":" "}}>{{ $unit->name }}</option>
+                            @endforeach
+                         </select>
+                    </div>
+                    <div class="form-group col-md-6">
                          <label for="name">Product Name</label>
-                        <input type="text" class="form-control" name="name" >
+                        <input type="text" class="form-control" name="name" value="{{ $editData->name }}" >
                     </div>
                     <div class="form-group col-md-6" style="padding-top: 30px">
-                        <input type="submit" class="btn btn-primary" value="Submit" >
+                        <input type="submit" class="btn btn-primary" value="Update" >
                     </div>
                    </div>
                 </form>
@@ -69,6 +96,15 @@
         $('#myForm').validate({
             rules: {
                 name: {
+                        required: true,
+                    },
+                supplier_id: {
+                        required: true,
+                    },
+                category_id: {
+                        required: true,
+                    },
+                unit_id: {
                         required: true,
                     },
             },

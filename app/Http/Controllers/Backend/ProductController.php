@@ -4,42 +4,59 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\Product;
+use App\Model\Supplier;
+use App\Model\Unit;
 use App\Model\Category;
 use Auth;
 
 class ProductController extends Controller
 {
     public function view(){
-        $allData = Category::all();
-        return view('backend.category.view-category',compact('allData'));
+        $allData = Product::all();
+        return view('backend.product.view-product',compact('allData'));
     }
     public function add(){
-        return view('backend.category.add-category');
+        $data['suppliers'] = Supplier::all();
+        $data['categories'] = Category::all();
+        $data['units'] = Unit::all();
+        return view('backend.product.add-product',$data);
     }
     public function store(Request $request){
-        $category = new Category();
-        $category->name = $request->name;
-        $category->created_by = Auth::user()->id;
-        $category->save();
+        $product = new Product();
+        $product->supplier_id = $request->supplier_id;
+        $product->category_id = $request->category_id;
+        $product->unit_id = $request->unit_id;
+        $product->name = $request->name;
+        $product->quantity = '0';
+        $product->created_by = Auth::user()->id;
+        $product->save();
 
-        return redirect()->route('categories.view')->with('success','Data Save SuccessFully');
+        return redirect()->route('products.view')->with('success','Data Save SuccessFully');
     }
     public function edit($id){
-        $editData = Category::find($id);
-        return view('backend.category.edit-category',compact('editData'));
+        $data['editData'] = Product::find($id);
+        $data['suppliers'] = Supplier::all();
+        $data['categories'] = Category::all();
+        $data['units'] = Unit::all();
+        return view('backend.product.edit-product',$data);
     }
     public function update(Request $request ,$id){
-        $category = Category::find($id);
-        $category->name = $request->name;
-        $category->updated_by = Auth::user()->id;
-        $category->save();
+        $product = Product::find($id);
+        $product->supplier_id = $request->supplier_id;
+        $product->category_id = $request->category_id;
+        $product->unit_id = $request->unit_id;
+        $product->name = $request->name;
+        $product->quantity = '0';
+        $product->created_by = Auth::user()->id;
+        $product->save();
 
-        return redirect()->route('categories.view')->with('success','Data Updated SuccessFully');
+        return redirect()->route('products.view')->with('success','Data Updated SuccessFully');
 
     }
     public function delete($id){
-        $category = Category::find($id);
-        $category->delete();
-        return redirect()->route('categories.view')->with('success','Data Delete SuccessFully');
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->route('products.view')->with('success','Data Delete SuccessFully');
     }
 }

@@ -1,5 +1,8 @@
 @extends('backend.layouts.master')
+
 @section('content')
+
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -32,7 +35,7 @@
             <div class="card">
               <div class="card-header">
                     <h3>
-                        Product List
+                        Product
                         <a class="btn btn-success float-right btn-sm"  href="{{ route('products.add') }}"><i class="fa fa-plus-circle"></i> Add Product</a>
                     </h3>
               </div><!-- /.card-header -->
@@ -41,6 +44,9 @@
                   <thead>
                   <tr>
                     <th>SL.</th>
+                    <th>Supplier Name</th>
+                    <th>Category</th>
+                    <th>Unit</th>
                     <th>Product Name</th>
                     <th>Action</th>
                   </tr>
@@ -50,6 +56,9 @@
                       @foreach ($allData as $key => $product)
                     <tr>
                         <td>{{ $key+1 }}</td>
+                        <td>{{ $product->supplier->name }}</td>
+                        <td>{{ $product->category->name }}</td>
+                        <td>{{ $product->unit->name }}</td>
                         <td>{{ $product->name }}</td>
                         <td>
                             <a title="Edit" class="btn btn-primary btn-sm" href="{{ route('products.edit',$product->id) }}"><i class="fa fa-edit"></i></a>
@@ -72,4 +81,6 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+
 @endsection
