@@ -55,11 +55,11 @@
                         <td>{{ $key+1 }}</td>
                         <td>{{ $category->name }}</td>
                         @php
-                        $count_category = App\Model\Product::where('supplier_id',$category->id)->count();
+                        $count_category = App\Model\Product::where('category_id',$category->id)->count();
                         @endphp
                         <td>
                             <a title="Edit" class="btn btn-primary btn-sm" href="{{ route('categories.edit',$category->id) }}"><i class="fa fa-edit"></i></a>
-<                        </td>
+                     </td>
                             @if($count_category < 1)
                             <a title="Delete" id="delete" class="btn btn-danger btn-sm" href="{{ route('categories.delete',$category->id) }}"><i class="fa fa-trash"></i></a>
                             @endif
