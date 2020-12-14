@@ -97,7 +97,7 @@
                                 <tr>
                                 <td colspan="5"></td>
                                 <td>
-                                    <input type="text" name="estimated_amount" id="estimated_amount" value="0" class="form-control form-control-sm text-right estimated-amount" style="background-color:#D8FD8A" readonly>
+                                    <input type="text" name="estimated_amount" id="estimated_amount" value="0" class="form-control form-control-sm text-right estimated_amount" style="background-color:#D8FD8A" readonly>
                                 </td>
                                 <td></td>
                                 </tr>
@@ -126,11 +126,11 @@
       <input type="hidden" name="supplier_id[]" value="@{{supplier_id}}">
       <td>
         <input type="hidden" name="category_id[]" value="@{{category_id}}">
-        @{{$category_name}}
+        @{{category_name}}
       </td>
       <td>
         <input type="hidden" name="product_id[]" value="@{{product_id}}">
-        @{{$product_name}}
+        @{{product_name}}
       </td>
       <td>
         <input type="number" min="1" class="form-control form-control-sm text-right buying_qty" name="buying_qty[]" value="1">
@@ -142,11 +142,9 @@
         <input type="text" class="form-control form-control-sm" name="description[]">
       </td>
       <td>
-        <input type="number" class="form-control form-control-sm text-right buying_price" name="buying_price[]" value="0" readonly>
+        <input class="form-control form-control-sm text-right buying_price" name="buying_price[]" value="0" readonly>
       </td>
-      <td>
-      <i class="btn btn-danfger btn-sm fa fa-window-close removeeventmore"></i>
-      </td>
+      <td><i class="btn btn-danger btn-sm fa fa-window-close removeeventmore"></i></td>
   </tr>
 </script>
 

@@ -209,7 +209,7 @@
   <!-- jquery-validation -->
 <script src="{{ asset('backend') }}/plugins/jquery-validation/jquery.validate.min.js"></script>>
 <script src="{{ asset('backend') }}/plugins/jquery-validation/additional-methods.min.js"></script>
-<script type="text/javascript" src="{{ asset('backend') }}/dist/js/handlebars.amd.min.js"></script>
+<script type="text/javascript" src="{{ asset('backend') }}/dist/js/handlebars.min.js"></script>
 
 
 <!-- page script -->
