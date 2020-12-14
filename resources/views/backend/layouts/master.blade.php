@@ -43,6 +43,10 @@
    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('backend') }}/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="{{ asset('backend') }}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -210,6 +214,8 @@
 <script src="{{ asset('backend') }}/plugins/jquery-validation/jquery.validate.min.js"></script>>
 <script src="{{ asset('backend') }}/plugins/jquery-validation/additional-methods.min.js"></script>
 <script type="text/javascript" src="{{ asset('backend') }}/dist/js/handlebars.min.js"></script>
+<!-- Select2 -->
+<script src="{{ asset('backend') }}/plugins/select2/js/select2.full.min.js"></script>
 
 
 <!-- page script -->
@@ -299,6 +305,11 @@
         });
     });
 
+</script>
+<script type="text/javascript">
+   $(function(){
+    $('.select2').select2();
+   });
 </script>
 
 </body>

@@ -43,15 +43,15 @@
                     <div class="form-row">
                     <div class="form-group col-md-4">
                          <label>Date</label>
-                         <input type="text" class="form-control datepicker" name="date" id="date" placeholder="YYYY-MM-DD" readonly>
+                         <input type="text" class="form-control form-control-sm datepicker" name="date" id="date" placeholder="YYYY-MM-DD" readonly>
                     </div>
                     <div class="form-group col-md-4">
                          <label>Purchase No</label>
-                         <input type="text" class="form-control" name="purchase_no" id="purchase_no">
+                         <input type="text" class="form-control form-control-sm" name="purchase_no" id="purchase_no">
                     </div>
                     <div class="form-group col-md-4">
                          <label>Supplier Name</label>
-                         <select name="supplier_id" id="supplier_id" class="form-control">
+                         <select name="supplier_id" id="supplier_id" class="form-control select2">
                             <option value="">Select Supplier</option>
                             @foreach($suppliers as $supplier)
                             <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
@@ -60,18 +60,18 @@
                     </div>
                     <div class="form-group col-md-4">
                          <label>Category Name</label>
-                         <select name="category_id" id="category_id" class="form-control">
+                         <select name="category_id" id="category_id" class="form-control select2">
                             <option value="">Select Category</option>
                          </select>
                     </div>
                     <div class="form-group col-md-6">
                          <label>Product Name</label>
-                         <select name="product_id" id="product_id" class="form-control">
+                         <select name="product_id" id="product_id" class="form-control select2">
                             <option value="">Select Product</option>
                          </select>
                     </div>
                     <div class="form-group col-md-2" style="padding-top: 30px">
-                        <a class="btn btn-success addeventmore"><i class="fa fa-plus-circle"></i> Add item</a>
+                        <a class="btn btn-success addeventmore btn-sm"><i class="fa fa-plus-circle"></i> Add item</a>
                     </div>
                    </div>
               </div><!-- /.card-body -->
