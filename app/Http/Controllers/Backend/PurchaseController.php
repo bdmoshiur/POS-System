@@ -68,7 +68,8 @@ class PurchaseController extends Controller
             ->where('id',$id)
             ->update(['status'=> 1]);
         }
-        purchase.pending.list
+        return redirect()->route('purchase.pending.list')->with('success','Data Approved SuccessFully');
+
     }
 
 }
