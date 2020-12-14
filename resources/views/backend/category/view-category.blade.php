@@ -59,10 +59,10 @@
                         @endphp
                         <td>
                             <a title="Edit" class="btn btn-primary btn-sm" href="{{ route('categories.edit',$category->id) }}"><i class="fa fa-edit"></i></a>
-                            @if($condition)
-
-                            @endif
+<                        </td>
+                            @if($count_category < 1)
                             <a title="Delete" id="delete" class="btn btn-danger btn-sm" href="{{ route('categories.delete',$category->id) }}"><i class="fa fa-trash"></i></a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
