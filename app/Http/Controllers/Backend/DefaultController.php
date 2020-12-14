@@ -19,4 +19,15 @@ class DefaultController extends Controller
         
         return response()->json($allCategory);
     }
+
+    public function getProduct(Request $requist){
+        $category_id = $requist->category_id;
+        $allProduct = Product::where('category_id',$category_id)->get();
+        
+        return response()->json($allProduct);
+    }
+
+
+
+
 }

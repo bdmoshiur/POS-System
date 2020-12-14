@@ -209,6 +209,7 @@
   <!-- jquery-validation -->
 <script src="{{ asset('backend') }}/plugins/jquery-validation/jquery.validate.min.js"></script>>
 <script src="{{ asset('backend') }}/plugins/jquery-validation/additional-methods.min.js"></script>
+<script type="text/javascript" src="{{ asset('backend') }}/dist/js/handlebars.amd.min.js"></script>
 
 
 <!-- page script -->
@@ -258,16 +259,6 @@ $(document).on('click','#delete',function(e){
 });
 </script>
 
-
-
-
-
-
-
-
-
-
-
 <script type="text/javascript" >
     $(document).ready(function(){
         $('#image').change(function(e){
@@ -280,10 +271,6 @@ $(document).on('click','#delete',function(e){
     });
 
 </script>
-
-
-
-
 
 </body>
 </html>
