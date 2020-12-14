@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\Product;
 use App\Model\Purchase;
 use App\Model\Supplier;
 use App\Model\Unit;
@@ -24,40 +23,31 @@ class PurchaseController extends Controller
         return view('backend.purchase.add-purchase',$data);
     }
     public function store(Request $request){
-        $product = new Purchase();
-        $product->supplier_id = $request->supplier_id;
-        $product->category_id = $request->category_id;
-        $product->unit_id = $request->unit_id;
-        $product->name = $request->name;
-        $product->quantity = '0';
-        $product->created_by = Auth::user()->id;
-        $product->save();
-
-        return redirect()->route('products.view')->with('success','Data Save SuccessFully');
-    }
-    public function edit($id){
-        $data['editData'] = Purchase::find($id);
-        $data['suppliers'] = Supplier::all();
-        $data['categories'] = Category::all();
-        $data['units'] = Unit::all();
-        return view('backend.product.edit-product',$data);
-    }
-    public function update(Request $request ,$id){
-        $product = Purchase::find($id);
-        $product->supplier_id = $request->supplier_id;
-        $product->category_id = $request->category_id;
-        $product->unit_id = $request->unit_id;
-        $product->name = $request->name;
-        $product->quantity = '0';
-        $product->created_by = Auth::user()->id;
-        $product->save();
-
-        return redirect()->route('products.view')->with('success','Data Updated SuccessFully');
-
+        if($request->category_id == null){
+            return redirect()->back()->with('error','Sorry! You do not select any item.');
+        }else{
+            $count_category = count($request->category_id);
+            for($i =0; $i < $count_category; $i++){
+                $purchase = new Purchase();
+                $purchase->date = date('Y-m-d',strtotime($request->date[$i]));
+                $purchase->purchase_no = $request->purchase_no[$i];
+                $purchase->supplier_id = $request->supplier_id[$i];
+                $purchase->category_id = $request->category_id[$i];
+                $purchase->product_id = $request->product_id[$i];
+                $purchase->buying_qty = $request->buying_qty[$i];
+                $purchase->unit_price = $request->unit_price[$i];
+                $purchase->buying_price = $request->buying_price[$i];
+                $purchase->description = $request->description[$i];
+                $purchase->created_by = Auth::user()->id;
+                $purchase->status = '0';
+                $purchase->save();
+            }
+        }
+        return redirect()->route('purchase.view')->with('success','Data Save SuccessFully');
     }
     public function delete($id){
-        $product = Purchase::find($id);
-        $product->delete();
-        return redirect()->route('products.view')->with('success','Data Delete SuccessFully');
+        $purchase = Purchase::find($id);
+        $purchase->delete();
+        return redirect()->route('purchase.view')->with('success','Data Delete SuccessFully');
     }
 }
