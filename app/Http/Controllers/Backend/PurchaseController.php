@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\Product;
 use App\Model\Purchase;
 use App\Model\Supplier;
 use App\Model\Unit;
 use App\Model\Category;
 use Auth;
+use DB;
 
 class PurchaseController extends Controller
 {
@@ -50,4 +52,23 @@ class PurchaseController extends Controller
         $purchase->delete();
         return redirect()->route('purchase.view')->with('success','Data Delete SuccessFully');
     }
+
+    public function pendingList(){
+        $allData = Purchase::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
+        return view('backend.purchase.view-pending-list',compact('allData'));
+    }
+
+    public function approve($id){
+        $purchase = Purchase::find($id);
+        $product = Product::where('id',$purchase->product_id)->first();
+        $purchase_qty = ((float)$purchase->buying_qty)+((float)$product->quantity);
+        $product->quantity = $purchase_qty;
+        if($product->save()){
+            DB::table('purchases')
+            ->where('id',$id)
+            ->update(['status'=> 1]);
+        }
+        purchase.pending.list
+    }
+
 }

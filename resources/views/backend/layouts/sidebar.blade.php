@@ -149,6 +149,12 @@ $route = Route::current()->getName();
                     <p>View Purchase</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('purchase.pending.list') }}" class="nav-link {{ ($route =='purchase.pending.list')?'active':''}}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Approval Purchase</p>
+                    </a>
+                </li>
             </ul>
       </li>
 

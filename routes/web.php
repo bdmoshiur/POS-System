@@ -39,10 +39,10 @@ Route::prefix('suppliers')->group(function () {
     Route::get('/edit/{id}', 'Backend\SupplierController@edit')->name('suppliers.edit');
     Route::post('/update/{id}', 'Backend\SupplierController@update')->name('suppliers.update');
     Route::get('/delete/{id}', 'Backend\SupplierController@delete')->name('suppliers.delete');
-    
+
     });
 
-    
+
 // Suppliers Route
 Route::prefix('customers')->group(function () {
     Route::get('/view', 'Backend\CustomerController@view')->name('customers.view');
@@ -51,7 +51,7 @@ Route::prefix('customers')->group(function () {
     Route::get('/edit/{id}', 'Backend\CustomerController@edit')->name('customers.edit');
     Route::post('/update/{id}', 'Backend\CustomerController@update')->name('customers.update');
     Route::get('/delete/{id}', 'Backend\CustomerController@delete')->name('customers.delete');
-    
+
     });
 
     // Units Route
@@ -62,7 +62,7 @@ Route::prefix('customers')->group(function () {
         Route::get('/edit/{id}', 'Backend\UnitController@edit')->name('units.edit');
         Route::post('/update/{id}', 'Backend\UnitController@update')->name('units.update');
         Route::get('/delete/{id}', 'Backend\UnitController@delete')->name('units.delete');
-        
+
         });
 
         // Categories Route
@@ -73,7 +73,7 @@ Route::prefix('customers')->group(function () {
         Route::get('/edit/{id}', 'Backend\CategoryController@edit')->name('categories.edit');
         Route::post('/update/{id}', 'Backend\CategoryController@update')->name('categories.update');
         Route::get('/delete/{id}', 'Backend\CategoryController@delete')->name('categories.delete');
-        
+
         });
 
            // Products Route
@@ -92,7 +92,8 @@ Route::prefix('customers')->group(function () {
             Route::get('/view', 'Backend\PurchaseController@view')->name('purchase.view');
             Route::get('/add', 'Backend\PurchaseController@add')->name('purchase.add');
             Route::post('/store', 'Backend\PurchaseController@store')->name('purchase.store');
-            Route::get('/edit/{id}', 'Backend\PurchaseController@edit')->name('purchase.edit');
+            Route::get('/pending', 'Backend\PurchaseController@pendingList')->name('purchase.pending.list');
+            Route::get('/approve/{id}', 'Backend\PurchaseController@approve')->name('purchase.approve');
             Route::post('/update/{id}', 'Backend\PurchaseController@update')->name('purchase.update');
             Route::get('/delete/{id}', 'Backend\PurchaseController@delete')->name('purchase.delete');
         });
