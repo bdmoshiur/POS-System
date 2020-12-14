@@ -103,5 +103,19 @@ Route::prefix('customers')->group(function () {
 
 
 
+        // invoice Route
+        Route::prefix('invoice')->group(function () {
+            Route::get('/view', 'Backend\InvoiceController@view')->name('invoice.view');
+            Route::get('/add', 'Backend\InvoiceController@add')->name('invoice.add');
+            Route::post('/store', 'Backend\InvoiceController@store')->name('invoice.store');
+            Route::get('/pending', 'Backend\InvoiceController@pendingList')->name('invoice.pending.list');
+            Route::get('/approve/{id}', 'Backend\InvoiceController@approve')->name('invoice.approve');
+            Route::post('/update/{id}', 'Backend\InvoiceController@update')->name('invoice.update');
+            Route::get('/delete/{id}', 'Backend\InvoiceController@delete')->name('invoice.delete');
+        });
+
+
+
+
 });
 
