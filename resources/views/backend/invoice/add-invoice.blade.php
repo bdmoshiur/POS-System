@@ -10,12 +10,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Manage Purchase </h1>
+            <h1 class="m-0 text-dark">Manage Invoice </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Purchase</li>
+              <li class="breadcrumb-item active">Invoice</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -35,43 +35,41 @@
             <div class="card">
               <div class="card-header">
                     <h3>
-                        Add Purchase
-                        <a class="btn btn-success float-right btn-sm"  href="{{ route('purchase.view') }}"><i class="fa fa-list"></i> Purchase List</a>
+                        Add Invoice
+                        <a class="btn btn-success float-right btn-sm"  href="{{ route('purchase.view') }}"><i class="fa fa-list"></i> Invoice List</a>
                     </h3>
               </div><!-- /.card-header -->
               <div class="card-body">
-                    <div class="form-row">
-                    <div class="form-group col-md-4">
+                  <div class="form-row">
+                    <div class="form-group col-md-1">
+                        <label>InvoiceNo</label>
+                        <input type="text" class="form-control form-control-sm" name="invoice_no" id="invoice_no" value="{{ $invoice_no }}" style="background-color:#D8FD8A" readonly>
+                    </div>
+                    <div class="form-group col-md-2">
                          <label>Date</label>
                          <input type="text" class="form-control form-control-sm datepicker" name="date" id="date" placeholder="YYYY-MM-DD" readonly>
                     </div>
-                    <div class="form-group col-md-4">
-                         <label>Purchase No</label>
-                         <input type="text" class="form-control form-control-sm" name="purchase_no" id="purchase_no">
-                    </div>
-                    <div class="form-group col-md-4">
-                         <label>Supplier Name</label>
-                         <select name="supplier_id" id="supplier_id" class="form-control select2">
-                            <option value="">Select Supplier</option>
-                            @foreach($suppliers as $supplier)
-                            <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                    <div class="form-group col-md-3">
+                         <label>Category Name</label>
+                         <select name="category_id" id="category_id" class="form-control select2">
+                            <option value="">Select category</option>
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                          </select>
                     </div>
-                    <div class="form-group col-md-4">
-                         <label>Category Name</label>
-                         <select name="category_id" id="category_id" class="form-control select2">
-                            <option value="">Select Category</option>
-                         </select>
-                    </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-3">
                          <label>Product Name</label>
                          <select name="product_id" id="product_id" class="form-control select2">
                             <option value="">Select Product</option>
                          </select>
                     </div>
-                    <div class="form-group col-md-2" style="padding-top: 30px">
-                        <a class="btn btn-success addeventmore btn-sm"><i class="fa fa-plus-circle"></i> Add item</a>
+                    <div class="form-group col-md-2">
+                        <label>Stock(Kg/Pic)</label>
+                        <input type="text" class="form-control form-control-sm" name="current_stock_qty" id="current_stock_qty" style="background-color:#D8FD8A" readonly>
+                   </div>
+                    <div class="form-group col-md-1" style="padding-top: 30px">
+                        <a class="btn btn-success addeventmore btn-sm"><i class="fa fa-plus-circle"></i> Add</a>
                     </div>
                    </div>
               </div><!-- /.card-body -->
@@ -105,7 +103,7 @@
                         </table>
                             <br>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary" id="storeButton">Purchase Store</button>
+                            <button type="submit" class="btn btn-primary" id="storeButton">Invoice Store</button>
                         </div>
                     </form>
                 </div>
@@ -217,31 +215,8 @@
           sum += parseFloat(value);
         }
       });
-
       $('#estimated_amount').val(sum);
-
     }
-  });
-</script>
-
-
-<script type="text/javascript">
-  $(function(){
-    $(document).on('change','#supplier_id',function(){
-      var supplier_id = $(this).val();
-      $.ajax({
-        url:"{{route('get-category')}}",
-        type: "GET",
-        data:{supplier_id:supplier_id},
-        success:function(data){
-          var html = '<option value="">Select Category</option>';
-          $.each(data,function(key,v){
-            html +='<option value="'+v.category_id+'">'+v.category.name+'</option>';
-          });
-          $('#category_id').html(html);
-        }
-      });
-    });
   });
 </script>
 
@@ -265,6 +240,22 @@
   });
 </script>
 
+<script type="text/javascript">
+    $(function(){
+      $(document).on('change','#product_id',function(){
+        var product_id = $(this).val();
+        $.ajax({
+        url:"{{route('check-product-stock')}}",
+        type: "GET",
+        data:{product_id:product_id},
+        success:function(data){
+          $('#current_stock_qty').val(data);
+        }
+      });
+
+      });
+    });
+  </script>
 
 <script>
     $(function () {
@@ -283,10 +274,7 @@
                         required: true,
                     },
             },
-
             messages: {
-
-
             },
             errorElement: 'span',
             errorPlacement: function (error, element) {

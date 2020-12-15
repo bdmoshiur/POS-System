@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Product;
 use App\Model\Purchase;
-use App\Model\Supplier;
-use App\Model\Unit;
 use App\Model\Category;
 use Auth;
 use DB;
@@ -23,9 +21,15 @@ class InvoiceController extends Controller
         return view('backend.invoice.view-invoice',compact('allData'));
     }
     public function add(){
-        $data['suppliers'] = Supplier::all();
         $data['categories'] = Category::all();
-        $data['units'] = Unit::all();
+        $invoice_data = Invoice::orderBy('id','DESC')->first();
+        if($invoice_data == null){
+            $firstReg = 0;
+            $data['invoice_no'] = $firstReg + 1;
+        }else{
+            $invoice_data = Invoice::orderBy('id','DESC')->first()->invoice_no;
+            $data['invoice_no'] = $invoice_data + 1;
+        }
         return view('backend.invoice.add-invoice',$data);
     }
     public function store(Request $request){

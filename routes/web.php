@@ -100,6 +100,7 @@ Route::prefix('customers')->group(function () {
 
         Route::get('/get-category','Backend\DefaultController@getCategory')->name('get-category');
         Route::get('/get-product','Backend\DefaultController@getProduct')->name('get-product');
+        Route::get('/get-stock','Backend\DefaultController@getStock')->name('check-product-stock');
 
 
 
