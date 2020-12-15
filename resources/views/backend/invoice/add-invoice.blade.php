@@ -83,9 +83,8 @@
                                 <th>Product Name</th>
                                 <th width="7%">Pcs/Kg</th>
                                 <th width="10%">Unit Price</th>
-                                <th>Description</th>
-                                <th width="10%">Total Price</th>
-                                <th>Action</th>
+                                <th width="17%">Total Price</th>
+                                <th width="10%">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="addRow" class="addRow">
@@ -93,7 +92,13 @@
                             </tbody>
                             <tbody>
                                 <tr>
-                                <td colspan="5"></td>
+                                    <td colspan="4" class="text-right">Discount</td>
+                                    <td>
+                                        <input type="text" name="discount_amount" id="discount_amount" class="form-control form-control-sm discount_amount" placeholder="Enter Discount Amount">
+                                    </td>
+                                </tr>
+                                <tr>
+                                <td colspan="4" class="text-right">Grand Total</td>
                                 <td>
                                     <input type="text" name="estimated_amount" id="estimated_amount" value="0" class="form-control form-control-sm text-right estimated_amount" style="background-color:#D8FD8A" readonly>
                                 </td>
@@ -101,7 +106,45 @@
                                 </tr>
                             </tbody>
                         </table>
-                            <br>
+                        <br>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <textarea name="description" id="description" class="form-control" placeholder="Write Description Here"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="">Paid Status</label>
+                                    <select name="paid_status" id="paid_status" class="form-control form-control-sm">
+                                        <option value="">Select Status</option>
+                                        <option value="full_paid">Full Paid</option>
+                                        <option value="full_due">Full Due</option>
+                                        <option value="partial_paid">Partial Paid</option>
+                                    </select>
+                                    <input type="text" name="paid_amount" class="form-control form-control-sm paid_amount" placeholder="Enter Paid Amount" style="display: none">
+                                </div>
+                                <div class="form-group col-md-9">
+                                    <label for="">Customer Name</label>
+                                    <select name="customer_id" id="customer_id" class="form-control form-control-sm select2">
+                                        <option value="">Select Customer</option>
+                                        @foreach ($customers as $customer)
+                                        <option value="{{ $customer->id }}">{{ $customer->name }} ({{ $customer->mobile_no}} - {{ $customer->address }})</option>
+                                        @endforeach
+                                        <option value="0">New Customer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row new_customer" style="display: none">
+                                <div class="form-group col-md-4">
+                                    <input type="text" name="name" id="name" class="form-control form-control-sm" placeholder="Write Customer name">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input type="text" name="mobile_no" id="mobile_no" class="form-control form-control-sm" placeholder="Write Customer Mobile Number">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input type="text" name="address" id="address" class="form-control form-control-sm" placeholder="Write Customer Address">
+                                </div>
+                            </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary" id="storeButton">Invoice Store</button>
                         </div>
@@ -119,9 +162,8 @@
   <!-- /.content-wrapper -->
 <script id="document-template" type="text/x-handlebars-template">
   <tr class='delete_add_more_item' id='delete_add_more_item'>
-      <input type="hidden" name="date[]" value="@{{date}}">
-      <input type="hidden" name="purchase_no[]" value="@{{purchase_no}}">
-      <input type="hidden" name="supplier_id[]" value="@{{supplier_id}}">
+      <input type="hidden" name="date" value="@{{date}}">
+      <input type="hidden" name="invoice_no" value="@{{invoice_no}}">
       <td>
         <input type="hidden" name="category_id[]" value="@{{category_id}}">
         @{{category_name}}
@@ -131,16 +173,13 @@
         @{{product_name}}
       </td>
       <td>
-        <input type="number" min="1" class="form-control form-control-sm text-right buying_qty" name="buying_qty[]" value="1">
+        <input type="number" min="1" class="form-control form-control-sm text-right selling_qty" name="selling_qty[]" value="1">
       </td>
       <td>
         <input type="number" class="form-control form-control-sm text-right unit_price" name="unit_price[]" value="">
       </td>
       <td>
-        <input type="text" class="form-control form-control-sm" name="description[]">
-      </td>
-      <td>
-        <input class="form-control form-control-sm text-right buying_price" name="buying_price[]" value="0" readonly>
+        <input class="form-control form-control-sm text-right selling_price" name="selling_price[]" value="0" readonly>
       </td>
       <td><i class="btn btn-danger btn-sm fa fa-window-close removeeventmore"></i></td>
   </tr>
@@ -150,8 +189,8 @@
   $(document).ready(function() {
     $(document).on("click", ".addeventmore", function(){
       var date = $("#date").val();
-      var purchase_no = $('#purchase_no').val();
-      var supplier_id = $('#supplier_id').val();
+      var invoice_no = $('#invoice_no').val();
+    //   var supplier_id = $('#supplier_id').val();
       var category_id = $('#category_id').val();
       var category_name = $('#category_id').find('option:selected').text();
       var product_id = $('#product_id').val();
@@ -161,15 +200,6 @@
         $.notify('Date is requird',{ globalPosition:'top-right', className: 'error'});
         return false;
       }
-      if(purchase_no == ""){
-        $.notify('Purchase no is requird',{ globalPosition:'top right', className: 'error'});
-        return false;
-      }
-      if(supplier_id == ""){
-        $.notify('Supplier  is requird',{ globalPosition:'top right', className: 'error'});
-        return false;
-      }
-
       if(category_id == ""){
         $.notify('Category is requird',{ globalPosition:'top right', className: 'error'});
         return false;
@@ -183,8 +213,7 @@
       var template = Handlebars.compile(source);
       var data = {
         date:date,
-        purchase_no:purchase_no,
-        supplier_id:supplier_id,
+        invoice_no:invoice_no,
         category_id:category_id,
         category_name:category_name,
         product_id:product_id,
@@ -199,22 +228,30 @@
       $(this).closest(".delete_add_more_item").remove();
       totalAmountPrice();
     });
-    $(document).on('keyup click','.unit_price,.buying_qty',function(){
+    $(document).on('keyup click','.unit_price,.selling_qty',function(){
       var unit_price = $(this).closest("tr").find("input.unit_price").val();
-      var qty = $(this).closest("tr").find("input.buying_qty").val();
+      var qty = $(this).closest("tr").find("input.selling_qty").val();
       var total = unit_price * qty;
-      $(this).closest("tr").find("input.buying_price").val(total);
-      totalAmountPrice();
+      $(this).closest("tr").find("input.selling_price").val(total);
+      $('#discount_amount').trigger('keyup');
+    });
+    $(document).on('keyup','#discount_amount', function(){
+        totalAmountPrice();
     });
 
+    // Calculate sum of amount in invoice
     function totalAmountPrice(){
       var sum = 0;
-      $('.buying_price').each(function(){
+      $('.selling_price').each(function(){
         var value = $(this).val();
         if(!isNaN(value) && value.length != 0){
           sum += parseFloat(value);
         }
       });
+      var discount_amount = parseFloat($('#discount_amount').val());
+      if(!isNaN(discount_amount) && discount_amount.length != 0){
+          sum -= parseFloat(discount_amount);
+        }
       $('#estimated_amount').val(sum);
     }
   });
@@ -255,52 +292,36 @@
 
       });
     });
-  </script>
-
-<script>
-    $(function () {
-        $('#myForm').validate({
-            rules: {
-                name: {
-                        required: true,
-                    },
-                supplier_id: {
-                        required: true,
-                    },
-                category_id: {
-                        required: true,
-                    },
-                unit_id: {
-                        required: true,
-                    },
-            },
-            messages: {
-            },
-            errorElement: 'span',
-            errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function (element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            }
-        });
-    });
 </script>
 
+<script type="text/javascript">
+
+    //Paid status
+    $(document).on('change','#paid_status',function(){
+        var paid_status = $(this).val();
+        if(paid_status == "partial_paid"){
+            $('.paid_amount').show();
+        }else{
+            $('.paid_amount').hide();
+        }
+    });
+    //new Customer
+    $(document).on('change','#customer_id',function(){
+        var customer_id = $(this).val();
+        if(customer_id == "0"){
+            $('.new_customer').show();
+        }else{
+            $('.new_customer').hide();
+        }
+    });
+</script>
 
 <script>
         $('.datepicker').datepicker({
             uiLibrary: 'bootstrap4',
             format : 'yyyy-mm-dd',
         });
-    </script>
-
-
-
+</script>
 
 
 @endsection

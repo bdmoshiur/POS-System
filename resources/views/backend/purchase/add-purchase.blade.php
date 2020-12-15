@@ -95,7 +95,7 @@
                             </tbody>
                             <tbody>
                                 <tr>
-                                <td colspan="5"></td>
+                                <td colspan="5" class="text-right">Grand Total</td>
                                 <td>
                                     <input type="text" name="estimated_amount" id="estimated_amount" value="0" class="form-control form-control-sm text-right estimated_amount" style="background-color:#D8FD8A" readonly>
                                 </td>

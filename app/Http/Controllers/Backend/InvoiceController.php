@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\Product;
 use App\Model\Purchase;
 use App\Model\Category;
+use App\Model\Customer;
 use Auth;
 use DB;
 use App\Model\Invoice;
@@ -30,6 +31,7 @@ class InvoiceController extends Controller
             $invoice_data = Invoice::orderBy('id','DESC')->first()->invoice_no;
             $data['invoice_no'] = $invoice_data + 1;
         }
+        $data['customers'] = Customer::all();
         return view('backend.invoice.add-invoice',$data);
     }
     public function store(Request $request){
