@@ -22,6 +22,7 @@ class PurchaseController extends Controller
         $data['suppliers'] = Supplier::all();
         $data['categories'] = Category::all();
         $data['units'] = Unit::all();
+        $data['date'] = date('Y-m-d');
         return view('backend.purchase.add-purchase',$data);
     }
     public function store(Request $request){

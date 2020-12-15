@@ -43,7 +43,7 @@
                     <div class="form-row">
                     <div class="form-group col-md-4">
                          <label>Date</label>
-                         <input type="text" class="form-control form-control-sm datepicker" name="date" id="date" placeholder="YYYY-MM-DD" readonly>
+                         <input type="text" class="form-control form-control-sm datepicker" value="{{ $date }}" name="date" id="date" placeholder="YYYY-MM-DD" readonly>
                     </div>
                     <div class="form-group col-md-4">
                          <label>Purchase No</label>
