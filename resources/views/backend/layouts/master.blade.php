@@ -149,7 +149,7 @@
         @endif
 
         <footer class="main-footer">
-            <strong>Copyright &copy; MosmoSoft <a href="https://adminlte.io"></a>.</strong>
+            <strong>Copyright &copy; Moshiur <a href="https://adminlte.io"></a>.</strong>
 
             <div class="float-right d-none d-sm-inline-block">
             <b>Designed & Development</b> Moshiur Rahman
@@ -230,7 +230,7 @@
   });
 </script>
 
-// Delete Sweet Alert
+<!-- Delete Sweet Alert-->
 <script type="text/javascript" >
     $(function(){
     $(document).on('click','#delete',function(e){
@@ -258,7 +258,7 @@
     });
 </script>
 
-// Approve Pending Sweet Alert
+<!-- Approve Pending Sweet Alert-->
 
 <script type="text/javascript" >
     $(function(){
