@@ -18,7 +18,7 @@ use App\Model\PaymentDetail;
 class InvoiceController extends Controller
 {
     public function view(){
-        $allData = Invoice::orderBy('date','desc')->orderBy('id','desc')->get();
+        $allData = Invoice::orderBy('date','desc')->orderBy('id','desc')->where('status','1')->get();
         return view('backend.invoice.view-invoice',compact('allData'));
     }
     public function add(){
@@ -104,30 +104,25 @@ class InvoiceController extends Controller
                 });
             }
         }
-        return redirect()->route('invoice.view')->with('success','Data Save SuccessFully');
+        return redirect()->route('invoice.pending.list')->with('success','Data Save SuccessFully');
     }
     public function delete($id){
-        $purchase = Purchase::find($id);
-        $purchase->delete();
-        return redirect()->route('purchase.view')->with('success','Data Delete SuccessFully');
+        $invoice = Invoice::find($id);
+        $invoice->delete();
+            InvoiceDetail::where('invoice_id',$invoice->id)->delete();
+            Payment::where('invoice_id',$invoice->id)->delete();
+            PaymentDetail::where('invoice_id',$invoice->id)->delete();
+        return redirect()->route('invoice.pending.list')->with('success','Data Delete SuccessFully');
     }
 
     public function pendingList(){
-        $allData = Purchase::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
-        return view('backend.purchase.view-pending-list',compact('allData'));
+        $allData = Invoice::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
+        return view('backend.invoice.pending-invoice',compact('allData'));
     }
 
     public function approve($id){
-        $purchase = Purchase::find($id);
-        $product = Product::where('id',$purchase->product_id)->first();
-        $purchase_qty = ((float)$purchase->buying_qty)+((float)$product->quantity);
-        $product->quantity = $purchase_qty;
-        if($product->save()){
-            DB::table('purchases')
-            ->where('id',$id)
-            ->update(['status'=> 1]);
-        }
-        return redirect()->route('purchase.pending.list')->with('success','Data Approved SuccessFully');
+        $invoice = Invoice::with('invoice_details')->find($id);
+        return view('backend.invoice.invoice-approve',compact('invoice'));
 
     }
 
