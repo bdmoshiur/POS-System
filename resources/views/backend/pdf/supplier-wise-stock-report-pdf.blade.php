@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Stock Report PDF</title>
+    <title> Supplier wise Stock Report PDF</title>
     <link rel="stylesheet" href="{{ asset('backend') }}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 </head>
 <body>
@@ -37,8 +37,8 @@
                <table>
                    <tbody>
                        <tr>
-                           <td width="70%"></td>
-                           <td><u><strong><span style="font-size: 15px">Stock Report</span></strong></u></td>
+                           <td width="50%"></td>
+                           <td><u><strong><span style="font-size: 15px">Supplier Wise Stock Report</span></strong></u></td>
                            <td></td>
                        </tr>
                    </tbody>
@@ -47,11 +47,11 @@
        </div>
        <div class="row">
            <div class="col-md-12">
+               <strong>Supplier Name :</strong> {{ $allData['0']->supplier->name }}
             <table border="1" width="100%">
                 <thead>
                 <tr>
                   <th>SL.</th>
-                  <th>Supplier Name</th>
                   <th>Category</th>
                   <th>Product Name</th>
                   <th>Stock</th>
@@ -62,7 +62,6 @@
                     @foreach ($allData as $key => $product)
                   <tr>
                       <td>{{ $key+1 }}</td>
-                      <td>{{ $product->supplier->name }}</td>
                       <td>{{ $product->category->name }}</td>
                       <td>{{ $product->name }}</td>
                       <td>{{ $product->quantity }}</td>
