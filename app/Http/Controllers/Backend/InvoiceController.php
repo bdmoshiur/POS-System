@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Product;
-use App\Model\Purchase;
 use App\Model\Category;
 use App\Model\Customer;
 use Auth;
@@ -125,5 +124,32 @@ class InvoiceController extends Controller
         return view('backend.invoice.invoice-approve',compact('invoice'));
 
     }
+
+    public function approvalStore(Request $request, $id){
+        foreach($request->selling_qty as $key => $val){
+            $invoice_details = InvoiceDetail::where('id',$key)->first();
+           $product = Product::where('id',$invoice_details->product_id)->first();
+            if($product->quantity < $request->selling_qty[$key]){
+                return redirect()->back()->with('error','Sorry! You Approved Maximum Value');
+            }
+        }
+
+        $invoice = Invoice::find($id);
+        $invoice->approved_by = Auth::user()->id;
+        $invoice->status = '1';
+        DB::transaction(function () use ($request,$invoice,$id) {
+            foreach($request->selling_qty as $key => $val){
+                $invoice_details = InvoiceDetail::where('id',$key)->first();
+                $product = Product::where('id',$invoice_details->product_id)->first();
+                $product->quantity = ((float)$product->quantity)-((float)$request->selling_qty[$key]);
+                $product->save();
+            }
+            $invoice->save();
+        });
+
+        return redirect()->route('invoice.pending.list')->with('success','Invoice Approved SuccessFully');
+
+    }
+
 
 }

@@ -113,7 +113,7 @@ Route::prefix('customers')->group(function () {
             Route::get('/approve/{id}', 'Backend\InvoiceController@approve')->name('invoice.approve');
             Route::post('/update/{id}', 'Backend\InvoiceController@update')->name('invoice.update');
             Route::get('/delete/{id}', 'Backend\InvoiceController@delete')->name('invoice.delete');
-            Route::get('/approve/store/{id}', 'Backend\InvoiceController@approvalStore')->name('approval.store');
+            Route::post('/approve/store/{id}', 'Backend\InvoiceController@approvalStore')->name('approval.store');
         });
 
 

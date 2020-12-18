@@ -57,7 +57,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <form action="post" action="{{ route('approval.store',$invoice->id) }}">
+                    <form method="post" action="{{ route('approval.store',$invoice->id) }}">
                         @csrf
                         <table width="100%" border="1" style="margin-bottom: 10px">
                             <thead>
@@ -79,7 +79,7 @@
                             <tr class="text-center">
                                 <input type="hidden" name="category_id[]" value="{{ $details->category_id }}">
                                 <input type="hidden" name="product_id[]" value="{{ $details->product_id }}">
-                                <input type="hidden" name="selling_qty[$details->id]" value="{{ $details->selling_qty }}">
+                                <input type="hidden" name="selling_qty[{{ $details->id }}]" value="{{ $details->selling_qty }}">
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $details->category->name }}</td>
                                 <td>{{ $details->product->name }}</td>
