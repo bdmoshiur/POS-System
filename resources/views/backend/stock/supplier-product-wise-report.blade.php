@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="show_supplier" style="display: none">
-                    <form action="{{ route('stock.report.supplier.product.wise.pdf') }}" method="GET" target="_blank" id="supplierWiseForm">
+                    <form action="{{ route('stock.report.supplier.wise.pdf') }}" method="GET" target="_blank" id="supplierWiseForm">
                         <div class="form-row">
                             <div class="col-sm-8">
                                 <label for="">Supplier Name</label>
@@ -61,6 +61,31 @@
                                 </select>
                             </div>
                             <div class="col-sm-4" style="padding-top: 29px">
+                                <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="show_product" style="display: none">
+                    <form action="{{ route('stock.report.product.wise.pdf') }}" method="GET" target="_blank" id="productWiseForm">
+                        <div class="form-row">
+                            <div class="col-sm-4">
+                                <label>Category Name</label>
+                                <select name="category_id" id="category_id" class="form-control select2">
+                                   <option value="">Select category</option>
+                                   @foreach($categories as $category)
+                                   <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                   @endforeach
+                                </select>
+                           </div>
+                           <div class="col-sm-6">
+                                <label>Product Name</label>
+                                <select name="product_id" id="product_id" class="form-control select2">
+                                   <option value="">Select Product</option>
+                                </select>
+                           </div>
+                            <div class="col-sm-2" style="padding-top: 29px">
                                 <button type="submit" class="btn btn-primary btn-sm">Search</button>
                             </div>
                         </div>
@@ -87,9 +112,13 @@
             }else{
                 $('.show_supplier').hide();
             }
+            if(search_value == 'product_wise'){
+                $('.show_product').show();
+            }else{
+                $('.show_product').hide();
+            }
         });
 </script>
-
 
   <script>
     $(function () {
@@ -115,6 +144,53 @@
         });
     });
 </script>
+
+<script>
+    $(function () {
+        $('#productWiseForm').validate({
+            egnore:[],
+            errorPlacement : function(error,element){
+                if(element.attr("name") == "category_id"){ error.insertAfter(element.next());}
+                else if(element.attr("name") == "product_id"){ error.insertAfter(element.next());}
+                else{error.insertAfter(element);}
+            },
+            errorClass: 'text-danger',
+            ValidClass: 'text-success',
+            rules: {
+                category_id: {
+                        required: true,
+                    },
+                product_id: {
+                        required: true,
+                    },
+            },
+            messages: {
+
+            },
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function(){
+      $(document).on('change','#category_id',function(){
+        var category_id = $(this).val();
+        $.ajax({
+          url:"{{route('get-product')}}",
+          type: "GET",
+          data:{category_id:category_id},
+          success:function(data){
+            var html = '<option value="">Select Product</option>';
+            $.each(data,function(key,v){
+              html +='<option value="'+v.id+'">'+v.name+'</option>';
+            });
+            $('#product_id').html(html);
+          }
+        });
+      });
+    });
+  </script>
+
 
 
 

@@ -38,7 +38,7 @@
                    <tbody>
                        <tr>
                            <td width="50%"></td>
-                           <td><u><strong><span style="font-size: 15px">Supplier Wise Stock Report</span></strong></u></td>
+                           <td><u><strong><span style="font-size: 15px">Product Wise Stock Report</span></strong></u></td>
                            <td></td>
                        </tr>
                    </tbody>
@@ -47,11 +47,10 @@
        </div>
        <div class="row">
            <div class="col-md-12">
-               <strong>Supplier Name :</strong> {{ $allData['0']->supplier->name }}
             <table border="1" width="100%">
                 <thead>
                 <tr>
-                  <th>SL.</th>
+                  <th>Supplier Name</th>
                   <th>Category</th>
                   <th>Product Name</th>
                   <th>Stock</th>
@@ -59,15 +58,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($allData as $key => $product)
                   <tr>
-                      <td>{{ $key+1 }}</td>
+                      <td>{{ $product->supplier->name }}</td>
                       <td>{{ $product->category->name }}</td>
                       <td>{{ $product->name }}</td>
                       <td>{{ $product->quantity }}</td>
                       <td>{{ $product->unit->name }}</td>
                   </tr>
-                  @endforeach
                  </tbody>
               </table>
               @php
