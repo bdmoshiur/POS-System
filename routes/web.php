@@ -114,6 +114,11 @@ Route::prefix('customers')->group(function () {
             Route::post('/update/{id}', 'Backend\InvoiceController@update')->name('invoice.update');
             Route::get('/delete/{id}', 'Backend\InvoiceController@delete')->name('invoice.delete');
             Route::post('/approve/store/{id}', 'Backend\InvoiceController@approvalStore')->name('approval.store');
+            Route::get('/print/list', 'Backend\InvoiceController@printInvoiceList')->name('invoice.print.list');
+            Route::get('/print/{id}', 'Backend\InvoiceController@printInvoice')->name('invoice.print');
+            Route::get('/daily/report', 'Backend\InvoiceController@dailyReport')->name('invoice.daily.report');
+            Route::get('/daily/report/pdf', 'Backend\InvoiceController@dailyReportPdf')->name('invoice.daily.report.pdf');
+
         });
 
 

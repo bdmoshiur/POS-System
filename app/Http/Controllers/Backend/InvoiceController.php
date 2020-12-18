@@ -8,6 +8,7 @@ use App\Model\Product;
 use App\Model\Category;
 use App\Model\Customer;
 use Auth;
+use PDF;
 use DB;
 use App\Model\Invoice;
 use App\Model\InvoiceDetail;
@@ -146,10 +147,34 @@ class InvoiceController extends Controller
             }
             $invoice->save();
         });
-
         return redirect()->route('invoice.pending.list')->with('success','Invoice Approved SuccessFully');
+    }
+    public function printInvoiceList(){
+        $allData = Invoice::orderBy('date','desc')->orderBy('id','desc')->where('status','1')->get();
+        return view('backend.invoice.pos-invoice-list',compact('allData'));
+    }
+
+    function printInvoice($id) {
+        $data['invoice'] = Invoice::with('invoice_details')->find($id);
+        $pdf = PDF::loadView('backend.pdf.invoice-pdf', $data);
+        $pdf->SetProtection(['copy', 'print'], '', 'pass');
+        return $pdf->stream('document.pdf');
+    }
+    public function dailyReport(){
+        return view('backend.invoice.daily-invoice-report');
+    }
+    public function dailyReportPdf(Request $request){
+        $sdate = date('Y-m-d',strtotime($request->start_date));
+        $edate = date('Y-m-d',strtotime($request->end_date));
+        $data['allData'] = Invoice::whereBetween('date',[$sdate,$edate]);
+        $data['sdate'] = date('Y-m-d',strtotime($request->start_date));
+        $data['edate'] = date('Y-m-d',strtotime($request->end_date));
+        $pdf = PDF::loadView('backend.pdf.daily-invoice-report-pdf', $data);
+        $pdf->SetProtection(['copy', 'print'], '', 'pass');
+        return $pdf->stream('document.pdf');
 
     }
+
 
 
 }

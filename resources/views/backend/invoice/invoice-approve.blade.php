@@ -40,10 +40,10 @@
                     </h3>
               </div><!-- /.card-header -->
               <div class="card-body">
+                @php
+                    $payment = App\Model\Payment::where('invoice_id',$invoice->id)->first();
+                @endphp
                     <table width="100%">
-                        @php
-                            $payment = App\Model\Payment::where('invoice_id',$invoice->id)->first();
-                        @endphp
                         <tbody>
                             <tr class="text-center">
                                 <td width="15%"><p><strong>Customer Info</strong></p></td>

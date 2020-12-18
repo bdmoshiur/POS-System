@@ -1,4 +1,5 @@
 
+
 @php
 $prefix = Request::route()->getPrefix();
 $route = Route::current()->getName();
@@ -177,6 +178,18 @@ $route = Route::current()->getName();
                     <a href="{{ route('invoice.pending.list') }}" class="nav-link {{ ($route =='invoice.pending.list')?'active':''}}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Approval Invoice</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('invoice.print.list') }}" class="nav-link {{ ($route =='invoice.print.list')?'active':''}}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Print Invoice</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('invoice.daily.report') }}" class="nav-link {{ ($route =='invoice.daily.report')?'active':''}}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Daily Invoice Report</p>
                     </a>
                 </li>
             </ul>
