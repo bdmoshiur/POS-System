@@ -25,4 +25,19 @@ class StockController extends Controller
         return $pdf->stream('document.pdf');
     }
 
+    public function supplierProductWise(){
+        $data['suppliers'] = Supplier::all();
+        return view('backend.stock.supplier-product-wise-report',$data);
+    }
+
+    public function supplierProductWisePdf(Request $request){
+        $data['allData'] = Product::orderBy('supplier_id','asc')->orderBy('category_id','asc')->where('supplier_id',$request->supplier_id)->get();
+        $pdf = PDF::loadView('backend.pdf.supplier-wise-stock-report-pdf', $data);
+        $pdf->SetProtection(['copy', 'print'], '', 'pass');
+        return $pdf->stream('document.pdf');
+    }
+
+
+
+
 }

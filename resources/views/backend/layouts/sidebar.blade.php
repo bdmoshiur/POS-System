@@ -210,8 +210,14 @@ $route = Route::current()->getName();
                     <p>Stock Report</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('stock.report.supplier.product.wise') }}" class="nav-link {{ ($route =='stock.report.supplier.product.wise')?'active':''}}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Supplier/Product Wise</p>
+                    </a>
+                </li>
             </ul>
-    </li>
+         </li>
 
 
 
