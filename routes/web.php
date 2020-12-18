@@ -122,6 +122,14 @@ Route::prefix('customers')->group(function () {
         });
 
 
+        //  Manage Stock Route
+        Route::prefix('stock')->group(function () {
+            Route::get('/report', 'Backend\StockController@stockReport')->name('stock.report');
+            Route::get('/report/pdf', 'Backend\StockController@stockReportPdf')->name('stock.report.pdf');
+
+        });
+
+
 
 
 });
