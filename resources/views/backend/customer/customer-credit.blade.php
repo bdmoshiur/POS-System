@@ -36,38 +36,41 @@
               <div class="card-header">
                     <h3>
                          Credit Customer List
-                        <a class="btn btn-success float-right btn-sm"  href="{{ route('customers.credit.pdf') }}"><i class="fa fa-download"></i>Download PDF</a>
+                        <a class="btn btn-success float-right btn-sm"  href="{{ route('customers.credit.pdf') }}" target="_blank"><i class="fa fa-download"></i>Download PDF</a>
                     </h3>
               </div><!-- /.card-header -->
               <div class="card-body">
-                {{-- <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th>SL.</th>
-                        <th>Name</th>
-                        <th>Mobile</th>
-                        <th>Email</th>
-                        <th>Address</th>
+                        <th>Customer Name</th>
+                        <th>Invoice No</th>
+                        <th>Date</th>
+                        <th>Amount</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                        @foreach ($allData as $key => $customer)
+                        @foreach ($allData as $key => $payment)
                         <tr>
                             <td>{{ $key+1 }}</td>
-                            <td>{{ $customer->name }}</td>
-                            <td>{{ $customer->mobile_no }}</td>
-                            <td>{{ $customer->email }}</td>
-                            <td>{{ $customer->address }}</td>
                             <td>
-                                <a title="Edit" class="btn btn-primary btn-sm" href="{{ route('customers.edit',$customer->id) }}"><i class="fa fa-edit"></i></a>
-                                <a title="Delete" id="delete" class="btn btn-danger btn-sm" href="{{ route('customers.delete',$customer->id) }}"><i class="fa fa-trash"></i></a>
+                                {{ $payment->customer->name }}
+                                ({{ $payment->customer->mobile_no }} - {{ $payment->customer->address }})
+                            </td>
+                            <td>Invoice No #{{ $payment->invoice->invoice_no }}</td>
+                            <td>{{ date('d-m-Y',strtotime($payment->invoice->date)) }}</td>
+                            <td>{{ $payment->due_amount }} Tk</td>
+                            <td>
+                                <a title="Edit" class="btn btn-primary btn-sm" href=""><i class="fa fa-edit"></i></a>
+                                <a title="Details" class="btn btn-success btn-sm" href=""><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
-               </table> --}}
+               </table>
 
               </div><!-- /.card-body -->
             </div>

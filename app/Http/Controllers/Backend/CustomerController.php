@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Customer;
 use App\Model\Payment;
+use PDF;
 use Auth;
 
 class CustomerController extends Controller
@@ -52,9 +53,15 @@ class CustomerController extends Controller
 
 
     public function creditCustomer(){
-        $allData = Payment::where('paid_status',['full_due','partial_paid'])->get();
-        dd($allData->toArray());
-        return view('backend.customer.customer-credit');
+        $allData = Payment::whereIn('paid_status',['full_due','partial_paid'])->get();
+        return view('backend.customer.customer-credit',compact('allData'));
+    }
+
+    public function creditCustomerPdf(){
+        $data['allData'] = Payment::whereIn('paid_status',['full_due','partial_paid'])->get();
+        $pdf = PDF::loadView('backend.pdf.customer-credit--pdf', $data);
+        $pdf->SetProtection(['copy', 'print'], '', 'pass');
+        return $pdf->stream('document.pdf');
     }
 
 
