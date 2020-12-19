@@ -35,7 +35,7 @@
             <div class="card">
               <div class="card-header">
                     <h3>
-                        Customer
+                        Customer List
                         <a class="btn btn-success float-right btn-sm"  href="{{ route('customers.add') }}"><i class="fa fa-plus-circle"></i> Add Customer</a>
                     </h3>
               </div><!-- /.card-header -->

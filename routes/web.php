@@ -53,6 +53,8 @@ Route::prefix('customers')->group(function () {
     Route::get('/delete/{id}', 'Backend\CustomerController@delete')->name('customers.delete');
     Route::get('/credit', 'Backend\CustomerController@creditCustomer')->name('customers.credit');
     Route::get('/credit/pdf', 'Backend\CustomerController@creditCustomerPdf')->name('customers.credit.pdf');
+    Route::get('/invoice/edit/{invoice_id}', 'Backend\CustomerController@editInvoice')->name('customers.edit.invoice');
+    Route::post('/invoice/update/{invoice_id}', 'Backend\CustomerController@updateInvoice')->name('customers.update.invoice');
 
     });
 
