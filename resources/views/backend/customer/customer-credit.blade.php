@@ -52,6 +52,9 @@
                     </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $total_sum = '0';
+                        @endphp
 
                         @foreach ($allData as $key => $payment)
                         <tr>
@@ -67,10 +70,22 @@
                                 <a title="Edit" class="btn btn-primary btn-sm" href=""><i class="fa fa-edit"></i></a>
                                 <a title="Details" class="btn btn-success btn-sm" href=""><i class="fa fa-eye"></i></a>
                             </td>
+                            @php
+                              $total_sum +=  $payment->due_amount;
+                            @endphp
                         </tr>
                         @endforeach
                     </tbody>
                </table>
+               <table class="table table-bordered table-striped">
+                <tbody>
+                    <tr>
+                        <td colspan="5" style="text-align: right;"><strong>Grant Total</strong></td>
+                        <td><strong>{{ $total_sum }} Tk</strong></td>
+                    </tr>
+                </tbody>
+           </table>
+
 
               </div><!-- /.card-body -->
             </div>
