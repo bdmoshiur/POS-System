@@ -54,16 +54,24 @@
                   <th>SL.</th>
                   <th>Category</th>
                   <th>Product Name</th>
+                  <th>In.Qty</th>
+                  <th>Out.Qty</th>
                   <th>Stock</th>
                   <th>Unit</th>
                 </tr>
                 </thead>
                 <tbody>
                     @foreach ($allData as $key => $product)
+                    @php
+                        $buying_total = App\Model\Purchase::where('category_id',$product->category_id)->where('product_id',$product->id)->where('status','1')->sum('buying_qty');
+                        $selling_total = App\Model\invoiceDetail::where('category_id',$product->category_id)->where('product_id',$product->id)->where('status','1')->sum('selling_qty');
+                    @endphp
                   <tr>
                       <td>{{ $key+1 }}</td>
                       <td>{{ $product->category->name }}</td>
                       <td>{{ $product->name }}</td>
+                      <td>{{ $buying_total }}</td>
+                      <td>{{ $selling_total }}</td>
                       <td>{{ $product->quantity }}</td>
                       <td>{{ $product->unit->name }}</td>
                   </tr>

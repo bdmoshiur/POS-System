@@ -81,6 +81,12 @@ $route = Route::current()->getName();
                     <p>View Customers</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('customers.credit') }}" class="nav-link {{ ($route =='customers.credit')?'active':''}}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Credit Customers</p>
+                    </a>
+                </li>
             </ul>
       </li>
       <li class="nav-item has-treeview {{ ($prefix =='/units')?'menu-open':''}}">
@@ -154,6 +160,12 @@ $route = Route::current()->getName();
                     <a href="{{ route('purchase.pending.list') }}" class="nav-link {{ ($route =='purchase.pending.list')?'active':''}}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Approval Purchase</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('purchase.report') }}" class="nav-link {{ ($route =='purchase.report')?'active':''}}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Daily Purchase Report</p>
                     </a>
                 </li>
             </ul>

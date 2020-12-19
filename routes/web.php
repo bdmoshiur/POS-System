@@ -43,7 +43,7 @@ Route::prefix('suppliers')->group(function () {
     });
 
 
-// Suppliers Route
+// Customers Route
 Route::prefix('customers')->group(function () {
     Route::get('/view', 'Backend\CustomerController@view')->name('customers.view');
     Route::get('/add', 'Backend\CustomerController@add')->name('customers.add');
@@ -51,6 +51,8 @@ Route::prefix('customers')->group(function () {
     Route::get('/edit/{id}', 'Backend\CustomerController@edit')->name('customers.edit');
     Route::post('/update/{id}', 'Backend\CustomerController@update')->name('customers.update');
     Route::get('/delete/{id}', 'Backend\CustomerController@delete')->name('customers.delete');
+    Route::get('/credit', 'Backend\CustomerController@creditCustomer')->name('customers.credit');
+    Route::get('/credit/pdf', 'Backend\CustomerController@creditCustomerPdf')->name('customers.credit.pdf');
 
     });
 
@@ -96,6 +98,8 @@ Route::prefix('customers')->group(function () {
             Route::get('/approve/{id}', 'Backend\PurchaseController@approve')->name('purchase.approve');
             Route::post('/update/{id}', 'Backend\PurchaseController@update')->name('purchase.update');
             Route::get('/delete/{id}', 'Backend\PurchaseController@delete')->name('purchase.delete');
+            Route::get('/report', 'Backend\PurchaseController@purchaseReport')->name('purchase.report');
+            Route::get('/report/pdf', 'Backend\PurchaseController@purchaseReportPdf')->name('purchase.daily.report.pdf');
         });
 
         Route::get('/get-category','Backend\DefaultController@getCategory')->name('get-category');

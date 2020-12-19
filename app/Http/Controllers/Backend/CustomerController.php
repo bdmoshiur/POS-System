@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Customer;
+use App\Model\Payment;
 use Auth;
 
 class CustomerController extends Controller
@@ -48,4 +49,15 @@ class CustomerController extends Controller
         $customer->delete();
         return redirect()->route('customers.view')->with('success','Data Delete SuccessFully');
     }
+
+
+    public function creditCustomer(){
+        $allData = Payment::where('paid_status',['full_due','partial_paid'])->get();
+        dd($allData->toArray());
+        return view('backend.customer.customer-credit');
+    }
+
+
+
+
 }

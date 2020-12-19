@@ -11,6 +11,7 @@ use App\Model\Unit;
 use App\Model\Category;
 use Auth;
 use DB;
+use PDF;
 
 class PurchaseController extends Controller
 {
@@ -70,7 +71,24 @@ class PurchaseController extends Controller
             ->update(['status'=> 1]);
         }
         return redirect()->route('purchase.pending.list')->with('success','Data Approved SuccessFully');
+    }
+
+    public function purchaseReport(){
+        return view('backend.purchase.daily-purchase-report');
+    }
+
+    public function purchaseReportPdf(Request $request){
+        $sdate = date('Y-m-d',strtotime($request->start_date));
+        $edate = date('Y-m-d',strtotime($request->end_date));
+        $data['allData'] = Purchase::whereBetween('date',[$sdate,$edate])->where('status','1')->orderBy('supplier_id')->orderBy('category_id')->orderBy('product_id')->get();
+        $data['start_date'] = date('Y-m-d',strtotime($request->start_date));
+        $data['end_date'] = date('Y-m-d',strtotime($request->end_date));
+        $pdf = PDF::loadView('backend.pdf.daily-purchase-report-pdf', $data);
+        $pdf->SetProtection(['copy', 'print'], '', 'pass');
+        return $pdf->stream('document.pdf');
 
     }
+
+
 
 }

@@ -40,57 +40,57 @@
                     </h3>
               </div><!-- /.card-header -->
               <div class="card-body">
-               <table id="example1" class="table table-bordered table-hover table-striped  table-responsive">
-                  <thead>
-                  <tr>
-                    <th>SL.</th>
-                    <th>Purchase No</th>
-                    <th>Date</th>
-                    <th>Supplier name</th>
-                    <th>Category</th>
-                    <th>Product name</th>
-                    <th>Description</th>
-                    <th>Quantity</th>
-                    <th>Unit Price</th>
-                    <th>Buying Price</th>
-                    <th>Status</th>
-                    <th style="width: 12%">Action</th>
-                  </tr>
-                  </thead>
-                  <tbody>
+                    <table id="example1" class="table table-bordered table-hover table-striped  table-responsive">
+                        <thead>
+                        <tr>
+                            <th>SL.</th>
+                            <th>Purchase No</th>
+                            <th>Date</th>
+                            <th>Supplier name</th>
+                            <th>Category</th>
+                            <th>Product name</th>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Buying Price</th>
+                            <th>Status</th>
+                            <th style="width: 12%">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                      @foreach ($allData as $key => $purchase)
-                    <tr>
-                        <td>{{ $key+1 }}</td>
-                        <td>{{ $purchase->purchase_no }}</td>
-                        <td>{{ date('d-m-Y',strtotime($purchase->date)) }}</td>
-                        <td>{{ $purchase->supplier->name }}</td>
-                        <td>{{ $purchase->category->name }}</td>
-                        <td>{{ $purchase->product->name }}</td>
-                        <td>{{ $purchase->description }}</td>
-                        <td>
-                            {{ $purchase->buying_qty }}
-                            {{ $purchase->product->unit->name }}
-                        </td>
-                        <td>{{ $purchase->unit_price }}</td>
-                        <td>{{ $purchase->buying_price }}</td>
-                        <td>
-                            {{-- <span>{{ ($purchase->status == '0') ? "Pending": "Approved" }}</span> --}}
-                            @if($purchase->status == '0')
-                                <span style="background: red; padding:5px">Pending</span>
-                            @elseif($purchase->status == '1')
-                                <span style="background: green; padding:5px">Approved</span>
-                            @endif
-                        </td>
-                        <td>
-                            @if($purchase->status == '0')
-                            <a title="Delete" id="delete" class="btn btn-danger btn-sm" href="{{ route('purchase.delete',$purchase->id) }}"><i class="fa fa-trash"></i></a>
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
-                   </tbody>
-                </table>
+                            @foreach ($allData as $key => $purchase)
+                            <tr>
+                                <td>{{ $key+1 }}</td>
+                                <td>{{ $purchase->purchase_no }}</td>
+                                <td>{{ date('d-m-Y',strtotime($purchase->date)) }}</td>
+                                <td>{{ $purchase->supplier->name }}</td>
+                                <td>{{ $purchase->category->name }}</td>
+                                <td>{{ $purchase->product->name }}</td>
+                                <td>{{ $purchase->description }}</td>
+                                <td>
+                                    {{ $purchase->buying_qty }}
+                                    {{ $purchase->product->unit->name }}
+                                </td>
+                                <td>{{ $purchase->unit_price }}</td>
+                                <td>{{ $purchase->buying_price }}</td>
+                                <td>
+                                    {{-- <span>{{ ($purchase->status == '0') ? "Pending": "Approved" }}</span> --}}
+                                    @if($purchase->status == '0')
+                                        <span style="background: red; padding:5px">Pending</span>
+                                    @elseif($purchase->status == '1')
+                                        <span style="background: green; padding:5px">Approved</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($purchase->status == '0')
+                                    <a title="Delete" id="delete" class="btn btn-danger btn-sm" href="{{ route('purchase.delete',$purchase->id) }}"><i class="fa fa-trash"></i></a>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
               </div><!-- /.card-body -->
             </div>
