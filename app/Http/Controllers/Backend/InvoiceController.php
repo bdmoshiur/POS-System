@@ -61,7 +61,7 @@ class InvoiceController extends Controller
                             $invoice_details->selling_qty = $request->selling_qty[$i];
                             $invoice_details->unit_price = $request->unit_price[$i];
                             $invoice_details->selling_price = $request->selling_price[$i];
-                            $invoice_details->status = '1';
+                            $invoice_details->status = '0';
                             $invoice_details->save();
                         }
                         if($request->customer_id == '0'){
@@ -132,15 +132,17 @@ class InvoiceController extends Controller
            $product = Product::where('id',$invoice_details->product_id)->first();
             if($product->quantity < $request->selling_qty[$key]){
                 return redirect()->back()->with('error','Sorry! You Approved Maximum Value');
+                }
             }
-        }
 
-        $invoice = Invoice::find($id);
-        $invoice->approved_by = Auth::user()->id;
-        $invoice->status = '1';
-        DB::transaction(function () use ($request,$invoice,$id) {
+            $invoice = Invoice::find($id);
+            $invoice->approved_by = Auth::user()->id;
+            $invoice->status = '1';
+            DB::transaction(function () use ($request,$invoice,$id) {
             foreach($request->selling_qty as $key => $val){
                 $invoice_details = InvoiceDetail::where('id',$key)->first();
+                $invoice_details->status = '1';
+                $invoice_details->save();
                 $product = Product::where('id',$invoice_details->product_id)->first();
                 $product->quantity = ((float)$product->quantity)-((float)$request->selling_qty[$key]);
                 $product->save();
