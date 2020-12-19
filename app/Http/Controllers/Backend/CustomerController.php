@@ -60,7 +60,7 @@ class CustomerController extends Controller
 
     public function creditCustomerPdf(){
         $data['allData'] = Payment::whereIn('paid_status',['full_due','partial_paid'])->get();
-        $pdf = PDF::loadView('backend.pdf.customer-credit--pdf', $data);
+        $pdf = PDF::loadView('backend.pdf.customer-credit-pdf', $data);
         $pdf->SetProtection(['copy', 'print'], '', 'pass');
         return $pdf->stream('document.pdf');
     }
@@ -92,6 +92,14 @@ class CustomerController extends Controller
             $payment_details->save();
             return redirect()->route('customers.credit')->with('success', 'Invoice SuccessFully Updated');
         }
+    }
+
+
+    public function InvoiceDetailsPdf($invoice_id){
+        $data['payment'] = Payment::where('invoice_id',$invoice_id)->first();
+        $pdf = PDF::loadView('backend.pdf.invoice-details-pdf', $data);
+        $pdf->SetProtection(['copy', 'print'], '', 'pass');
+        return $pdf->stream('document.pdf');
     }
 
 

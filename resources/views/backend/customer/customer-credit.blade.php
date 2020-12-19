@@ -68,7 +68,7 @@
                             <td>{{ $payment->due_amount }} Tk</td>
                             <td>
                                 <a title="Edit" class="btn btn-primary btn-sm" href="{{ route('customers.edit.invoice',$payment->invoice_id) }}"><i class="fa fa-edit"></i></a>
-                                <a title="Details" class="btn btn-success btn-sm" href=""><i class="fa fa-eye"></i></a>
+                                <a title="Details" class="btn btn-success btn-sm" href="{{ route('customers.invoice.details.pdf',$payment->invoice_id) }}" target="_blank"><i class="fa fa-eye"></i></a>
                             </td>
                             @php
                               $total_sum +=  $payment->due_amount;

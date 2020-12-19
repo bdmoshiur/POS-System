@@ -55,6 +55,7 @@ Route::prefix('customers')->group(function () {
     Route::get('/credit/pdf', 'Backend\CustomerController@creditCustomerPdf')->name('customers.credit.pdf');
     Route::get('/invoice/edit/{invoice_id}', 'Backend\CustomerController@editInvoice')->name('customers.edit.invoice');
     Route::post('/invoice/update/{invoice_id}', 'Backend\CustomerController@updateInvoice')->name('customers.update.invoice');
+    Route::get('/invoice/details/{invoice_id}', 'Backend\CustomerController@InvoiceDetailsPdf')->name('customers.invoice.details.pdf');
 
     });
 
