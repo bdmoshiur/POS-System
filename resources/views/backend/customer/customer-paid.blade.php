@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Manage Credit Customer</h1>
+            <h1 class="m-0 text-dark">Manage Paid Customer</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -35,8 +35,8 @@
             <div class="card">
               <div class="card-header">
                     <h3>
-                         Credit Customer List
-                        <a class="btn btn-success float-right btn-sm"  href="{{ route('customers.credit.pdf') }}" target="_blank"><i class="fa fa-download"></i>Download PDF</a>
+                         Paid Customer List
+                        <a class="btn btn-success float-right btn-sm"  href="{{ route('customers.paid.pdf') }}" target="_blank"><i class="fa fa-download"></i>Download PDF</a>
                     </h3>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -53,7 +53,7 @@
                     </thead>
                     <tbody>
                         @php
-                            $total_due = '0';
+                            $total_paid = '0';
                         @endphp
 
                         @foreach ($allData as $key => $payment)
@@ -65,13 +65,12 @@
                             </td>
                             <td>Invoice No #{{ $payment->invoice->invoice_no }}</td>
                             <td>{{ date('d-m-Y',strtotime($payment->invoice->date)) }}</td>
-                            <td>{{ $payment->due_amount }} Tk</td>
+                            <td>{{ $payment->paid_amount }} Tk</td>
                             <td>
-                                <a title="Edit" class="btn btn-primary btn-sm" href="{{ route('customers.edit.invoice',$payment->invoice_id) }}"><i class="fa fa-edit"></i></a>
                                 <a title="Details" class="btn btn-success btn-sm" href="{{ route('customers.invoice.details.pdf',$payment->invoice_id) }}" target="_blank"><i class="fa fa-eye"></i></a>
                             </td>
                             @php
-                              $total_due +=  $payment->due_amount;
+                              $total_paid +=  $payment->paid_amount;
                             @endphp
                         </tr>
                         @endforeach
@@ -81,7 +80,7 @@
                 <tbody>
                     <tr>
                         <td colspan="5" style="text-align: right;"><strong>Grant Total</strong></td>
-                        <td><strong>{{ $total_due }} Tk</strong></td>
+                        <td><strong>{{ $total_paid }} Tk</strong></td>
                     </tr>
                 </tbody>
            </table>

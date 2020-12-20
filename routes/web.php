@@ -57,6 +57,9 @@ Route::prefix('customers')->group(function () {
     Route::post('/invoice/update/{invoice_id}', 'Backend\CustomerController@updateInvoice')->name('customers.update.invoice');
     Route::get('/invoice/details/{invoice_id}', 'Backend\CustomerController@InvoiceDetailsPdf')->name('customers.invoice.details.pdf');
 
+    Route::get('/paid', 'Backend\CustomerController@paidCustomer')->name('customers.paid');
+    Route::get('/paid/pdf', 'Backend\CustomerController@paidCustomerPdf')->name('customers.paid.pdf');
+
     });
 
     // Units Route

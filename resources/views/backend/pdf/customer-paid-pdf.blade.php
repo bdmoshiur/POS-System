@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Credit Customer Report PDF</title>
+    <title>Paid Customer Report PDF</title>
     <link rel="stylesheet" href="{{ asset('backend') }}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 </head>
 <body>
@@ -38,7 +38,7 @@
                    <tbody>
                        <tr>
                            <td width="50%"></td>
-                           <td><u><strong><span style="font-size: 15px">Credit Customer Report</span></strong></u></td>
+                           <td><u><strong><span style="font-size: 15px">Paid Customer Report</span></strong></u></td>
                            <td></td>
                        </tr>
                    </tbody>
@@ -59,7 +59,7 @@
                 </thead>
                 <tbody>
                     @php
-                        $total_due = '0';
+                        $total_paid = '0';
                     @endphp
                     @foreach ($allData as $key => $payment)
                     <tr>
@@ -70,15 +70,15 @@
                         </td>
                         <td>Invoice No #{{ $payment->invoice->invoice_no }}</td>
                         <td>{{ date('d-m-Y',strtotime($payment->invoice->date)) }}</td>
-                        <td>{{ $payment->due_amount }} Tk</td>
+                        <td>{{ $payment->paid_amount }} Tk</td>
                         @php
-                            $total_due +=  $payment->due_amount;
+                            $total_paid +=  $payment->paid_amount;
                         @endphp
                     </tr>
                     @endforeach
                     <tr>
                         <td colspan="4" style="text-align: right;"><strong>Grant Total</strong></td>
-                        <td><strong>{{ $total_due }} Tk</strong></td>
+                        <td><strong>{{ $total_paid }} Tk</strong></td>
                     </tr>
                 </tbody>
            </table>
