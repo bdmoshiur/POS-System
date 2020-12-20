@@ -56,7 +56,7 @@
                                 <select name="customer_id"class="form-control select2">
                                     <option value="">Select Customer</option>
                                       @foreach ($customers as $customer)
-                                        <option name="{{ $customer->id }}">{{ $customer->name}} ({{ $customer->mobile_no }} - {{ $customer->address }})</option>
+                                        <option value="{{ $customer->id }}">{{ $customer->name}} ({{ $customer->mobile_no }} - {{ $customer->address }})</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -75,7 +75,7 @@
                                 <select name="customer_id"class="form-control select2">
                                     <option value="">Select Customer</option>
                                     @foreach ($customers as $customer)
-                                        <option name="{{ $customer->id }}">{{ $customer->name}} ({{ $customer->mobile_no }} - {{ $customer->address }})</option>
+                                        <option value="{{ $customer->id }}">{{ $customer->name}} ({{ $customer->mobile_no }} - {{ $customer->address }})</option>
                                     @endforeach
                                 </select>
                             </div>
