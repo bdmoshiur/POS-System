@@ -153,9 +153,6 @@
                 customer_id: {
                         required: true,
                     },
-                product_id: {
-                        required: true,
-                    },
             },
             messages: {
 
