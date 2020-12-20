@@ -60,6 +60,12 @@ Route::prefix('customers')->group(function () {
     Route::get('/paid', 'Backend\CustomerController@paidCustomer')->name('customers.paid');
     Route::get('/paid/pdf', 'Backend\CustomerController@paidCustomerPdf')->name('customers.paid.pdf');
 
+
+
+    Route::get('/wise/report', 'Backend\CustomerController@CustomerWiseReport')->name('customers.wise.report');
+    Route::get('/wise/credit/report', 'Backend\CustomerController@CustomerWiseCredit')->name('customers.wise.credit.report');
+    Route::get('/wise/paid/report', 'Backend\CustomerController@CustomerWisePaid')->name('customers.wise.paid.report');
+
     });
 
     // Units Route

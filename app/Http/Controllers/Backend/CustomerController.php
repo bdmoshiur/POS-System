@@ -116,6 +116,25 @@ class CustomerController extends Controller
         return $pdf->stream('document.pdf');
     }
 
+    public function CustomerWiseReport(){
+        $customers = Customer::all();
+        return view('backend.customer.customer-wise-report', compact('customers'));
+    }
+
+    public function CustomerWiseCredit(Request $request){
+        $data['allData'] = Payment::where('customer_id',$request->customer_id)->whereIn('paid_status',['full_due','partial_paid'])->get();
+        $pdf = PDF::loadView('backend.pdf.customer-wise-credit-pdf', $data);
+        $pdf->SetProtection(['copy', 'print'], '', 'pass');
+        return $pdf->stream('document.pdf');
+    }
+
+    public function CustomerWisePaid(Request $request){
+        $data['allData'] = Payment::where('customer_id',$request->customer_id)->where('paid_status','!=','full_due')->get();
+        $pdf = PDF::loadView('backend.pdf.customer-wise-paid-pdf', $data);
+        $pdf->SetProtection(['copy', 'print'], '', 'pass');
+        return $pdf->stream('document.pdf');
+    }
+
 
 
 }
