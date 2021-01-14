@@ -151,9 +151,9 @@
         <footer class="main-footer">
             <strong>Copyright &copy; 2020-<?php echo date("Y");?> <a href="https://adminlte.io"></a>.</strong>
 
-            <div class="float-right d-none d-sm-inline-block">
+            {{-- <div class="float-right d-none d-sm-inline-block">
             <b>Designed & Development</b> 40B-Group-2(Thesis Project)
-            </div>
+            </div> --}}
         </footer>
 
         <!-- Control Sidebar -->
