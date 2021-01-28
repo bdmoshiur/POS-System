@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Model\Unit;
 use Auth;
+use App\Model\Unit;
+use App\Model\Product;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class UnitController extends Controller
 {
     public function view(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $allData = Unit::all();
-        return view('backend.unit.view-unit',compact('allData'));
+        return view('backend.unit.view-unit',compact('allData','totalQuantity','lowStoc'));
     }
     public function add(){
-        return view('backend.unit.add-unit');
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
+        return view('backend.unit.add-unit',compact('totalQuantity','lowStoc'));
     }
     public function store(Request $request){
         $unit = new Unit();
@@ -25,8 +32,11 @@ class UnitController extends Controller
         return redirect()->route('units.view')->with('success','Data Save SuccessFully');
     }
     public function edit($id){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $editData = Unit::find($id);
-        return view('backend.unit.edit-unit',compact('editData'));
+        return view('backend.unit.edit-unit',compact('editData','totalQuantity','lowStoc'));
     }
     public function update(Request $request ,$id){
         $unit = Unit::find($id);

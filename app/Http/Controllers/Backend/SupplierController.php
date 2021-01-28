@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Model\Supplier;
 use Auth;
+use App\Model\Product;
+use App\Model\Supplier;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SupplierController extends Controller
 {
     public function view(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $allData = Supplier::all();
-        return view('backend.supplier.view-supplier',compact('allData'));
+        return view('backend.supplier.view-supplier',compact('allData','totalQuantity','lowStoc'));
     }
     public function add(){
-        return view('backend.supplier.add-supplier');
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
+        return view('backend.supplier.add-supplier',compact('lowStoc','totalQuantity'));
     }
     public function store(Request $request){
         $supplier = new Supplier();
@@ -28,9 +35,13 @@ class SupplierController extends Controller
         return redirect()->route('suppliers.view')->with('success','Data Save SuccessFully');
     }
     public function edit($id){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $editData = Supplier::find($id);
-        return view('backend.supplier.edit-supplier',compact('editData'));
+        return view('backend.supplier.edit-supplier',compact('editData','totalQuantity','lowStoc'));
     }
+
     public function update(Request $request ,$id){
         $supplier = Supplier::find($id);
         $supplier->name = $request->name;

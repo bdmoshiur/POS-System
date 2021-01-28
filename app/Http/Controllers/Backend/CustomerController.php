@@ -2,22 +2,29 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Model\Customer;
-use App\Model\Payment;
-use App\Model\PaymentDetail;
 use PDF;
 use Auth;
+use App\Model\Payment;
+use App\Model\Product;
+use App\Model\Customer;
+use App\Model\PaymentDetail;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CustomerController extends Controller
 {
     public function view(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $allData = Customer::all();
-        return view('backend.customer.view-customer',compact('allData'));
+        return view('backend.customer.view-customer',compact('allData','totalQuantity','lowStoc'));
     }
     public function add(){
-        return view('backend.customer.add-customer');
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
+        return view('backend.customer.add-customer',compact('totalQuantity','lowStoc'));
     }
     public function store(Request $request){
         $customer = new Customer();
@@ -31,8 +38,11 @@ class CustomerController extends Controller
         return redirect()->route('customers.view')->with('success','Data Save SuccessFully');
     }
     public function edit($id){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $editData = Customer::find($id);
-        return view('backend.customer.edit-customer',compact('editData'));
+        return view('backend.customer.edit-customer',compact('editData','totalQuantity','lowStoc'));
     }
     public function update(Request $request ,$id){
         $customer = Customer::find($id);
@@ -54,8 +64,11 @@ class CustomerController extends Controller
 
 
     public function creditCustomer(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+        
         $allData = Payment::whereIn('paid_status',['full_due','partial_paid'])->get();
-        return view('backend.customer.customer-credit',compact('allData'));
+        return view('backend.customer.customer-credit',compact('allData','totalQuantity','lowStoc'));
     }
 
     public function creditCustomerPdf(){
@@ -66,8 +79,11 @@ class CustomerController extends Controller
     }
 
     public function editInvoice($invoice_id){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $payment = Payment::where('invoice_id',$invoice_id)->first();
-        return view('backend.customer.edit-invoice', compact('payment'));
+        return view('backend.customer.edit-invoice',compact('payment','totalQuantity','lowStoc'));
     }
 
     public function updateInvoice(Request $request, $invoice_id){
@@ -105,8 +121,11 @@ class CustomerController extends Controller
 
 
     public function paidCustomer(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $allData = Payment::where('paid_status','!=','full_due')->get();
-        return view('backend.customer.customer-paid',compact('allData'));
+        return view('backend.customer.customer-paid',compact('allData','totalQuantity','lowStoc'));
     }
 
     public function paidCustomerPdf(){
@@ -117,8 +136,11 @@ class CustomerController extends Controller
     }
 
     public function CustomerWiseReport(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $customers = Customer::all();
-        return view('backend.customer.customer-wise-report', compact('customers'));
+        return view('backend.customer.customer-wise-report', compact('customers','totalQuantity','lowStoc'));
     }
 
     public function CustomerWiseCredit(Request $request){

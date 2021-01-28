@@ -16,10 +16,16 @@ use PDF;
 class PurchaseController extends Controller
 {
     public function view(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $allData = Purchase::orderBy('date','desc')->orderBy('id','desc')->get();
-        return view('backend.purchase.view-purchase',compact('allData'));
+        return view('backend.purchase.view-purchase',compact('allData','totalQuantity','lowStoc'));
     }
     public function add(){
+        $data['lowStoc'] = 5;
+        $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
+
         $data['suppliers'] = Supplier::all();
         $data['categories'] = Category::all();
         $data['units'] = Unit::all();
@@ -56,8 +62,11 @@ class PurchaseController extends Controller
     }
 
     public function pendingList(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $allData = Purchase::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
-        return view('backend.purchase.view-pending-list',compact('allData'));
+        return view('backend.purchase.view-pending-list',compact('allData','totalQuantity','lowStoc'));
     }
 
     public function approve($id){
@@ -74,7 +83,10 @@ class PurchaseController extends Controller
     }
 
     public function purchaseReport(){
-        return view('backend.purchase.daily-purchase-report');
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
+        return view('backend.purchase.daily-purchase-report',compact('totalQuantity','lowStoc'));
     }
 
     public function purchaseReportPdf(Request $request){

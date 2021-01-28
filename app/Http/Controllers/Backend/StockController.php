@@ -15,8 +15,11 @@ use PDF;
 class StockController extends Controller
 {
     public function stockReport(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $allData = Product::orderBy('supplier_id','asc')->orderBy('category_id','asc')->get();
-        return view('backend.stock.stock-report',compact('allData'));
+        return view('backend.stock.stock-report',compact('allData','totalQuantity','lowStoc'));
     }
     public function stockReportPdf(){
         $data['allData'] = Product::orderBy('supplier_id','asc')->orderBy('category_id','asc')->get();
@@ -26,6 +29,9 @@ class StockController extends Controller
     }
 
     public function supplierProductWise(){
+        $data['lowStoc'] = 5;
+        $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
+
         $data['suppliers'] = Supplier::all();
         $data['categories'] = Category::all();
         return view('backend.stock.supplier-product-wise-report',$data);

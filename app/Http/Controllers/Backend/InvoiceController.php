@@ -18,10 +18,16 @@ use App\Model\PaymentDetail;
 class InvoiceController extends Controller
 {
     public function view(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $allData = Invoice::orderBy('date','desc')->orderBy('id','desc')->where('status','1')->get();
-        return view('backend.invoice.view-invoice',compact('allData'));
+        return view('backend.invoice.view-invoice',compact('allData','totalQuantity','lowStoc'));
     }
     public function add(){
+        $data['lowStoc'] = 5;
+        $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
+        
         $data['categories'] = Category::all();
         $invoice_data = Invoice::orderBy('id','DESC')->first();
         if($invoice_data == null){
@@ -116,13 +122,19 @@ class InvoiceController extends Controller
     }
 
     public function pendingList(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $allData = Invoice::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
-        return view('backend.invoice.pending-invoice',compact('allData'));
+        return view('backend.invoice.pending-invoice',compact('allData','totalQuantity','lowStoc'));
     }
 
     public function approve($id){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $invoice = Invoice::with('invoice_details')->find($id);
-        return view('backend.invoice.invoice-approve',compact('invoice'));
+        return view('backend.invoice.invoice-approve',compact('invoice','totalQuantity','lowStoc'));
 
     }
 
@@ -152,8 +164,11 @@ class InvoiceController extends Controller
         return redirect()->route('invoice.pending.list')->with('success','Invoice Approved SuccessFully');
     }
     public function printInvoiceList(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $allData = Invoice::orderBy('date','desc')->orderBy('id','desc')->where('status','1')->get();
-        return view('backend.invoice.pos-invoice-list',compact('allData'));
+        return view('backend.invoice.pos-invoice-list',compact('allData','totalQuantity','lowStoc'));
     }
 
     function printInvoice($id) {
@@ -163,7 +178,10 @@ class InvoiceController extends Controller
         return $pdf->stream('document.pdf');
     }
     public function dailyReport(){
-        return view('backend.invoice.daily-invoice-report');
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
+        return view('backend.invoice.daily-invoice-report',compact('totalQuantity','lowStoc'));
     }
     public function dailyReportPdf(Request $request){
         $sdate = date('Y-m-d',strtotime($request->start_date));

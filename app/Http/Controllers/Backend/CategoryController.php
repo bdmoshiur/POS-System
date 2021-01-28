@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Model\Category;
 use Auth;
+use App\Model\Product;
+use App\Model\Category;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 
 class CategoryController extends Controller
 {
     public function view(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+        
         $allData = Category::all();
-        return view('backend.category.view-category',compact('allData'));
+        return view('backend.category.view-category',compact('allData','totalQuantity','lowStoc'));
     }
     public function add(){
-        return view('backend.category.add-category');
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+        
+        return view('backend.category.add-category',compact('totalQuantity','lowStoc'));
     }
     public function store(Request $request){
         $category = new Category();
@@ -26,8 +33,11 @@ class CategoryController extends Controller
         return redirect()->route('categories.view')->with('success','Data Save SuccessFully');
     }
     public function edit($id){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $editData = Category::find($id);
-        return view('backend.category.edit-category',compact('editData'));
+        return view('backend.category.edit-category',compact('editData','totalQuantity','lowStoc'));
     }
     public function update(Request $request ,$id){
         $category = Category::find($id);

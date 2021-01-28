@@ -2,23 +2,30 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use App\User;
+use App\Model\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
     public function view(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $id = Auth::User()->id;
         $user  = User::findOrfail($id);
-        return view('backend.user.view-profile', compact('user'));
+        return view('backend.user.view-profile', compact('user','totalQuantity','lowStoc'));
     }
 
       public function edit(){
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
         $id = Auth::User()->id;
         $editData  = User::findOrfail($id);
-        return view('backend.user.edit-profile', compact('editData'));
+        return view('backend.user.edit-profile', compact('editData','totalQuantity','lowStoc'));
     }
 
 
@@ -45,7 +52,10 @@ class ProfileController extends Controller
     }
 
     public function PasswordView(){
-        return view('backend.user.edit-password');
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
+        return view('backend.user.edit-password',compact('totalQuantity','lowStoc'));
     }
 
 

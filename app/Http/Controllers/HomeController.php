@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Customer;
+use App\Model\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('backend.layouts.home');
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
+        $customers = Customer::where('status','1')->get()->count();
+        return view('backend.layouts.home',compact('customers','totalQuantity','lowStoc'));
     }
 }

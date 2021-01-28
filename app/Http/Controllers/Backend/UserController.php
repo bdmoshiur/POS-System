@@ -3,29 +3,35 @@
 namespace App\Http\Controllers\Backend;
 
 use App\User;
+use App\Model\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
 
-    public function view(){
+    public function view() {
+        $data['lowStoc'] = 5;
+        $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
 
         $data['allData'] = User::all();
-        return view('backend.user.view-user',$data);
+        return view('backend.user.view-user', $data );
     }
 
     public function add(){
-       return view('backend.user.add-user');
+        $lowStoc = 5;
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+
+       return view( 'backend.user.add-user',compact('totalQuantity','lowStoc'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request) {
 
         $data = new User();
         $data->usertype = $request->usertype;
         $data->name = $request->name;
         $data->email = $request->email;
-        $data->password =bcrypt($request->password);
+        $data->password = bcrypt( $request->password );
         $data->save();
 
         return redirect()->route('users.view')->with('success','Data Inserted Successfully');
@@ -34,8 +40,11 @@ class UserController extends Controller
 
 
      public function edit($id){
+            $lowStoc = 5;
+            $totalQuantity = Product::where('status',1)->sum('quantity');
+
             $data = User::findOrfail($id);
-           return view('backend.user.edit-user',compact('data'));
+           return view('backend.user.edit-user',compact('data','totalQuantity','lowStoc'));
 
     }
 
