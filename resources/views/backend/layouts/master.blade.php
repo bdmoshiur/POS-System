@@ -116,7 +116,7 @@
                     <!-- Brand Logo -->
                     <a href="{{ route('home') }}" class="brand-link">
                         <img src="{{ asset('backend') }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                        <span class="brand-text font-weight-light">Dashbord</span>
+                        <span class="brand-text font-weight-light">Dashboard</span>
                     </a>
                     <!-- Sidebar -->
             <div class="sidebar">

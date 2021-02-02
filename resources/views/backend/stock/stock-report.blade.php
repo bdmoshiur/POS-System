@@ -57,7 +57,7 @@
                       @foreach ($allData as $key => $product)
                       @php
                           $buying_total = App\Model\Purchase::where('category_id',$product->category_id)->where('product_id',$product->id)->where('status','1')->sum('buying_qty');
-                          $selling_total = App\Model\invoiceDetail::where('category_id',$product->category_id)->where('product_id',$product->id)->where('status','1')->sum('selling_qty');
+                          $selling_total = App\Model\InvoiceDetail::where('category_id',$product->category_id)->where('product_id',$product->id)->where('status','1')->sum('selling_qty');
                       @endphp
                     <tr>
                         <td>{{ $key+1 }}</td>
