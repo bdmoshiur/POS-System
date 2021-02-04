@@ -13,14 +13,14 @@ use Auth;
 class ProductController extends Controller
 {
     public function view(){
-        $lowStoc = 5;
+
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         $allData = Product::all();
-        return view('backend.product.view-product',compact('allData','totalQuantity','lowStoc'));
+        return view('backend.product.view-product',compact('allData','totalQuantity'));
     }
     public function add(){
-        $data['lowStoc'] = 5;
+
         $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
 
         $data['suppliers'] = Supplier::all();
@@ -41,7 +41,7 @@ class ProductController extends Controller
         return redirect()->route('products.view')->with('success','Data Save SuccessFully');
     }
     public function edit($id){
-        $data['lowStoc'] = 5;
+
         $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
 
         $data['editData'] = Product::find($id);

@@ -11,7 +11,7 @@ class UserController extends Controller
 {
 
     public function view() {
-        $data['lowStoc'] = 5;
+
         $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
 
         $data['allData'] = User::all();
@@ -19,10 +19,10 @@ class UserController extends Controller
     }
 
     public function add(){
-        $lowStoc = 5;
+
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
-       return view( 'backend.user.add-user',compact('totalQuantity','lowStoc'));
+       return view( 'backend.user.add-user',compact('totalQuantity'));
     }
 
     public function store(Request $request) {
@@ -40,11 +40,11 @@ class UserController extends Controller
 
 
      public function edit($id){
-            $lowStoc = 5;
+
             $totalQuantity = Product::where('status',1)->sum('quantity');
 
             $data = User::findOrfail($id);
-           return view('backend.user.edit-user',compact('data','totalQuantity','lowStoc'));
+           return view('backend.user.edit-user',compact('data','totalQuantity'));
 
     }
 

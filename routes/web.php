@@ -106,6 +106,10 @@ Route::prefix('customers')->group(function () {
             Route::get('/view', 'Backend\PurchaseController@view')->name('purchase.view');
             Route::get('/add', 'Backend\PurchaseController@add')->name('purchase.add');
             Route::post('/store', 'Backend\PurchaseController@store')->name('purchase.store');
+
+            Route::get('/edit/{id}', 'Backend\PurchaseController@edit')->name('purchase.edit');
+            Route::get('/update/{id}', 'Backend\PurchaseController@update')->name('purchase.update');
+            
             Route::get('/pending', 'Backend\PurchaseController@pendingList')->name('purchase.pending.list');
             Route::get('/approve/{id}', 'Backend\PurchaseController@approve')->name('purchase.approve');
             Route::post('/update/{id}', 'Backend\PurchaseController@update')->name('purchase.update');
@@ -145,6 +149,13 @@ Route::prefix('customers')->group(function () {
             Route::get('/report/supplier/product/wise', 'Backend\StockController@supplierProductWise')->name('stock.report.supplier.product.wise');
             Route::get('/report/supplier/wise/pdf', 'Backend\StockController@supplierWisePdf')->name('stock.report.supplier.wise.pdf');
             Route::get('/report/product/wise/pdf', 'Backend\StockController@productWisePdf')->name('stock.report.product.wise.pdf');
+
+        });
+
+
+          //  Manage Auto Order Route
+          Route::prefix('autoorder')->group(function () {
+            Route::get('/view', 'Backend\AutoOrderController@view')->name('autoorder.view');
 
         });
 

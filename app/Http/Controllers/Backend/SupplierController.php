@@ -11,17 +11,17 @@ use App\Http\Controllers\Controller;
 class SupplierController extends Controller
 {
     public function view(){
-        $lowStoc = 5;
+
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         $allData = Supplier::all();
-        return view('backend.supplier.view-supplier',compact('allData','totalQuantity','lowStoc'));
+        return view('backend.supplier.view-supplier',compact('allData','totalQuantity'));
     }
     public function add(){
-        $lowStoc = 5;
+
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
-        return view('backend.supplier.add-supplier',compact('lowStoc','totalQuantity'));
+        return view('backend.supplier.add-supplier',compact('totalQuantity'));
     }
     public function store(Request $request){
         $supplier = new Supplier();
@@ -35,11 +35,11 @@ class SupplierController extends Controller
         return redirect()->route('suppliers.view')->with('success','Data Save SuccessFully');
     }
     public function edit($id){
-        $lowStoc = 5;
+
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         $editData = Supplier::find($id);
-        return view('backend.supplier.edit-supplier',compact('editData','totalQuantity','lowStoc'));
+        return view('backend.supplier.edit-supplier',compact('editData','totalQuantity'));
     }
 
     public function update(Request $request ,$id){

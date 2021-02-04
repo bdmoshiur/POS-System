@@ -12,17 +12,15 @@ use App\Http\Controllers\Controller;
 class CategoryController extends Controller
 {
     public function view(){
-        $lowStoc = 5;
         $totalQuantity = Product::where('status',1)->sum('quantity');
-        
+
         $allData = Category::all();
-        return view('backend.category.view-category',compact('allData','totalQuantity','lowStoc'));
+        return view('backend.category.view-category',compact('allData','totalQuantity'));
     }
     public function add(){
-        $lowStoc = 5;
         $totalQuantity = Product::where('status',1)->sum('quantity');
-        
-        return view('backend.category.add-category',compact('totalQuantity','lowStoc'));
+
+        return view('backend.category.add-category',compact('totalQuantity'));
     }
     public function store(Request $request){
         $category = new Category();
@@ -33,11 +31,10 @@ class CategoryController extends Controller
         return redirect()->route('categories.view')->with('success','Data Save SuccessFully');
     }
     public function edit($id){
-        $lowStoc = 5;
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         $editData = Category::find($id);
-        return view('backend.category.edit-category',compact('editData','totalQuantity','lowStoc'));
+        return view('backend.category.edit-category',compact('editData','totalQuantity'));
     }
     public function update(Request $request ,$id){
         $category = Category::find($id);

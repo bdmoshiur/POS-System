@@ -11,21 +11,21 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
     public function view(){
-        $lowStoc = 5;
+
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         $id = Auth::User()->id;
         $user  = User::findOrfail($id);
-        return view('backend.user.view-profile', compact('user','totalQuantity','lowStoc'));
+        return view('backend.user.view-profile', compact('user','totalQuantity'));
     }
 
       public function edit(){
-        $lowStoc = 5;
+
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         $id = Auth::User()->id;
         $editData  = User::findOrfail($id);
-        return view('backend.user.edit-profile', compact('editData','totalQuantity','lowStoc'));
+        return view('backend.user.edit-profile', compact('editData','totalQuantity'));
     }
 
 
@@ -52,10 +52,10 @@ class ProfileController extends Controller
     }
 
     public function PasswordView(){
-        $lowStoc = 5;
+
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
-        return view('backend.user.edit-password',compact('totalQuantity','lowStoc'));
+        return view('backend.user.edit-password',compact('totalQuantity'));
     }
 
 

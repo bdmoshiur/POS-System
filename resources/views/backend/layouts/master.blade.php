@@ -82,7 +82,7 @@
             <ul class="navbar-nav ml-auto">
 
 
-                @if ($totalQuantity < $lowStoc)
+                @if ($totalQuantity < 20)
                     <h2 class="alert alert-warning" role="alert">Your Product is low!</h2>
                 @endif
 

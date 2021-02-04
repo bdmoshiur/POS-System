@@ -27,13 +27,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $lowStoc = 5;
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         $customers = Customer::where('status','1')->get()->count();
         $suppliers = Supplier::where('status','1')->get()->count();
         $products = Product::where('status','1')->get()->count();
         $invoices = Invoice::where('status','1')->get()->count();
-        return view('backend.layouts.home',compact('customers','suppliers','products','invoices','totalQuantity','lowStoc'));
+        return view('backend.layouts.home',compact('customers','suppliers','products','invoices','totalQuantity'));
     }
 }

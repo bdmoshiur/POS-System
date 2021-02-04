@@ -16,14 +16,14 @@ use PDF;
 class PurchaseController extends Controller
 {
     public function view(){
-        $lowStoc = 5;
+
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         $allData = Purchase::orderBy('date','desc')->orderBy('id','desc')->get();
-        return view('backend.purchase.view-purchase',compact('allData','totalQuantity','lowStoc'));
+        return view('backend.purchase.view-purchase',compact('allData','totalQuantity'));
     }
     public function add(){
-        $data['lowStoc'] = 5;
+
         $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
 
         $data['suppliers'] = Supplier::all();
@@ -55,6 +55,53 @@ class PurchaseController extends Controller
         }
         return redirect()->route('purchase.view')->with('success','Data Save SuccessFully');
     }
+
+
+    public function edit($id){
+
+        $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
+
+        $data['suppliers'] = Supplier::find($id);
+        $data['categories'] = Category::find($id);
+        $data['units'] = Unit::find($id);
+        $data['date'] = date('Y-m-d');
+        $data['product'] = Product::find($id);
+        $data['purchase'] = Purchase::find($id);
+        return view('backend.purchase.edit-purchase',$data);
+    }
+
+    public function update(Request $request,$id){
+        if($request->category_id == null){
+            return redirect()->back()->with('error','Sorry! You do not select any item.');
+        }
+        else
+        {
+            $count_category = count($request->category_id);
+            for($i =0; $i < $count_category; $i++){
+                $purchase = Purchase::find($id);
+                $purchase->date = date('Y-m-d',strtotime($request->date[$i]));
+                $purchase->purchase_no = $request->purchase_no[$i];
+                $purchase->supplier_id = $request->supplier_id[$i];
+                $purchase->category_id = $request->category_id[$i];
+                $purchase->product_id = $request->product_id[$i];
+                $purchase->buying_qty = $request->buying_qty[$i];
+                $purchase->unit_price = $request->unit_price[$i];
+                $purchase->buying_price = $request->buying_price[$i];
+                $purchase->description = $request->description[$i];
+                $purchase->created_by = Auth::user()->id;
+                $purchase->status = '0';
+                $purchase->save();
+            }
+        }
+        return redirect()->route('purchase.pending.list')->with('success','Data Save SuccessFully');
+    }
+
+
+
+
+
+
+
     public function delete($id){
         $purchase = Purchase::find($id);
         $purchase->delete();
@@ -62,11 +109,11 @@ class PurchaseController extends Controller
     }
 
     public function pendingList(){
-        $lowStoc = 5;
+
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         $allData = Purchase::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
-        return view('backend.purchase.view-pending-list',compact('allData','totalQuantity','lowStoc'));
+        return view('backend.purchase.view-pending-list',compact('allData','totalQuantity'));
     }
 
     public function approve($id){
@@ -83,10 +130,10 @@ class PurchaseController extends Controller
     }
 
     public function purchaseReport(){
-        $lowStoc = 5;
+
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
-        return view('backend.purchase.daily-purchase-report',compact('totalQuantity','lowStoc'));
+        return view('backend.purchase.daily-purchase-report',compact('totalQuantity'));
     }
 
     public function purchaseReportPdf(Request $request){

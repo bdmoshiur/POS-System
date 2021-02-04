@@ -15,7 +15,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Product</li>
+              <li class="breadcrumb-item active">Order</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -35,8 +35,7 @@
             <div class="card">
               <div class="card-header">
                     <h3>
-                        Product
-                        <a class="btn btn-success float-right btn-sm"  href="{{ route('products.add') }}"><i class="fa fa-plus-circle"></i> Add Product</a>
+                        Product Auto Order
                     </h3>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -45,36 +44,21 @@
                   <tr>
                     <th>SL.</th>
                     <th>Supplier Name</th>
-                    <th>Category</th>
-                    <th>Unit</th>
                     <th>Product Name</th>
-                    <th>Product status</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
 
-                      @foreach ($allData as $key => $product)
+                      @foreach ($allData as $key => $purchase)
                     <tr>
                         <td>{{ $key+1 }}</td>
-                        <td>{{ $product->supplier->name }}</td>
-                        <td>{{ $product->category->name }}</td>
-                        <td>{{ $product->unit->name }}</td>
-                        <td>{{ $product->name }}</td>
+                        <td>{{ $purchase->supplier->name }}</td>
+                        <td>{{ $purchase->name }}</td>
                         <td>
-                            @if ( $product->quantity < 10 )
-                                low
-                            @else
-                                full
-                            @endif
-                        </td>
-                        @php
-                        $count_product = App\Model\Purchase::where('product_id',$product->id)->count();
-                        @endphp
-                        <td>
-                            <a title="Edit" class="btn btn-primary btn-sm" href="{{ route('products.edit',$product->id) }}"><i class="fa fa-edit"></i></a>
-                            @if($count_product < 1)
-                            <a title="Delete" id="delete" class="btn btn-danger btn-sm" href="{{ route('products.delete',$product->id) }}"><i class="fa fa-trash"></i></a>
+                            {{ $purchase->product->quantity }}
+                            @if ($purchase->product->quantity < 20)
+                            <a class="btn btn-warning" href="{{ route('purchase.edit',$purchase->id) }}"><i class="fa fa-bars"> Apner purchase( {{ $purchase->product->quantity }} ) kome gasse joldi Purcess koren</i></a>
                             @endif
                         </td>
                     </tr>

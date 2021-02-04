@@ -19,4 +19,5 @@ class Product extends Model
     public function unit(){
         return $this->belongsTo(Unit::class,'unit_id','id');
     }
+    
 }
