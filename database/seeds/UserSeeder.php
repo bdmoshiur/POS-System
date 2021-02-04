@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'mobile' => '01749302454',
             'address' => 'dhaka bangladesh',
-            'gender' => 'male',
+            'gender' => 'Male',
             'password' => bcrypt('admin@gmail.com')
         ]);
     }

@@ -72,8 +72,8 @@
                       <label for="gender">Gender</label>
                         <select name="gender" id="gender" class="form-control">
                             <option value="">Select Gender</option>
-                            <option value="Male"{{($editData->gender =='Male') ? 'selected' : '' }}>{{ $editData->gender }}</option>
-                            <option value="Female"{{($editData->gender =='Female') ? 'selected' : '' }} >{{ $editData->gender }}</option>
+                            <option value="Male"{{($editData->gender =='Male') ? 'selected' : '' }}>{{isset($editData)? $editData->gender : '' }}</option>
+                            <option value="Female"{{($editData->gender =='Female') ? 'selected' : '' }} >{{isset($editData)? $editData->gender : '' }}</option>
                          </select>
                           <font style="color:red">{{ ($errors->has('gender')) ? ($errors->first('gender')):'' }}</font>
                     </div>

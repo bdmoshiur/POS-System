@@ -94,32 +94,25 @@
 				<div class="d-flex justify-content-center form_container">
                     <form  method="POST" action="{{ route('login') }}">
                         @csrf
-
                         @if ($errors->any())
                             <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-
                                 @foreach ($errors->all() as $error)
                                 <strong>{{ $error }}</strong><br>
                                 @endforeach
-
                             </div>
                         @endif
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
-
-
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus placeholder="Username">
 					    </div>
 					    <div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
-
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password" placeholder="Password">
 					    </div>
 							<div class="d-flex justify-content-center mt-3 login_container">
                                 <button type="submit" name="button" class="btn login_btn">Login</button>

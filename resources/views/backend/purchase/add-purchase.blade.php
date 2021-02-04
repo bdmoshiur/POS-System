@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-group col-md-4">
                          <label>Purchase No</label>
-                         <input type="text" class="form-control form-control-sm" name="purchase_no" id="purchase_no">
+                         <input type="text" class="form-control form-control-sm" name="purchase_no" id="purchase_no" value="">
                     </div>
                     <div class="form-group col-md-4">
                          <label>Supplier Name</label>
