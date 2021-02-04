@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Model\Customer;
+use App\Model\Invoice;
 use App\Model\Product;
+use App\Model\Supplier;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -29,6 +31,9 @@ class HomeController extends Controller
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         $customers = Customer::where('status','1')->get()->count();
-        return view('backend.layouts.home',compact('customers','totalQuantity','lowStoc'));
+        $suppliers = Supplier::where('status','1')->get()->count();
+        $products = Product::where('status','1')->get()->count();
+        $invoices = Invoice::where('status','1')->get()->count();
+        return view('backend.layouts.home',compact('customers','suppliers','products','invoices','totalQuantity','lowStoc'));
     }
 }
