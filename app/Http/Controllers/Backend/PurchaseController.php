@@ -91,7 +91,11 @@ class PurchaseController extends Controller
 
                 $data = array(
                 'email' => $request->email,
+                'buying_qty' => $request->buying_qty,
+                'unit_price' => $request->unit_price,
+                'buying_price' => $request->buying_price,
                 'description' => $request->description,
+
                 );
 
                 Mail::send('backend.emails.contact', $data, function($message) use($data) {
