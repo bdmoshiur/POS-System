@@ -97,4 +97,22 @@ return [
         ],
     ],
 
+
+      // Customize by moshiur
+
+      'stream' => [
+        'ssl' =>[
+            'allow_self_signed' => true,
+            'verify_peer' => false,
+            'verify_per_name' => false,
+        ],
+    ]
+
+
+
+
+
+
+
+
 ];

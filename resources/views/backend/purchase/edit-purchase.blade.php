@@ -48,6 +48,7 @@
                     <div class="form-group col-md-4">
                          <label>Purchase No</label>
                          <input type="text" class="form-control form-control-sm" name="purchase_no" id="purchase_no" value="{{ $purchase->purchase_no }}" readonly>
+                         <input type="hidden" class="form-control form-control-sm" name="email" id="email" value="{{ $purchase->supplier->email }}" >
                     </div>
                     <div class="form-group col-md-4">
                          <label>Supplier Name</label>
@@ -120,6 +121,7 @@
   <tr class='delete_add_more_item' id='delete_add_more_item'>
       <input type="hidden" name="date" value="@{{date}}">
       <input type="hidden" name="purchase_no" value="@{{purchase_no}}">
+      <input type="hidden" name="email" value="@{{email}}">
       <input type="hidden" name="supplier_id" value="@{{supplier_id}}">
       <td>
         <input type="hidden" name="category_id" value="@{{category_id}}">
@@ -150,6 +152,7 @@
     $(document).on("click", ".addeventmore", function(){
       var date = $("#date").val();
       var purchase_no = $('#purchase_no').val();
+      var email = $('#email').val();
       var supplier_id = $('#supplier_id').val();
       var category_id = $('#category_id').val();
       var category_name = $('#category_id').find('option:selected').text();
@@ -183,6 +186,7 @@
       var data = {
         date:date,
         purchase_no:purchase_no,
+        email:email,
         supplier_id:supplier_id,
         category_id:category_id,
         category_name:category_name,

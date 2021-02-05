@@ -19,6 +19,7 @@ class CreatePurchasesTable extends Migration
             $table->integer('category_id');
             $table->integer('product_id');
             $table->string('purchase_no');
+            // $table->string('email')->nullable();
             $table->date('date');
             $table->longText('description')->nullable();
             $table->double('buying_qty');

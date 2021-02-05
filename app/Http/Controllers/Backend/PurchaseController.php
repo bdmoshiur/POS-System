@@ -12,6 +12,7 @@ use App\Model\Category;
 use Auth;
 use DB;
 use PDF;
+use Mail;
 
 class PurchaseController extends Controller
 {
@@ -58,7 +59,6 @@ class PurchaseController extends Controller
 
 
     public function edit($id){
-
         $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
 
         $data['suppliers'] = Supplier::find($id);
@@ -77,6 +77,7 @@ class PurchaseController extends Controller
                 $purchase = Purchase::find($id);
                 $purchase->date = date('Y-m-d',strtotime($request->date));
                 $purchase->purchase_no = $request->purchase_no;
+                // $purchase->email = $request->email;
                 $purchase->supplier_id = $request->supplier_id;
                 $purchase->category_id = $request->category_id;
                 $purchase->product_id = $request->product_id;
@@ -87,6 +88,20 @@ class PurchaseController extends Controller
                 $purchase->created_by = Auth::user()->id;
                 $purchase->status = '0';
                 $purchase->save();
+
+                $data = array(
+                'email' => $request->email,
+                'description' => $request->description,
+                );
+
+                Mail::send('backend.emails.contact', $data, function($message) use($data) {
+                    $message->from('moshiurcse888@gmail.com','Test email for POS system with WUB');
+                    $message->to($data['email']);
+                    $message->subject('Amader aro kisu Product lagbe');
+                });
+
+
+
         }
         return redirect()->route('purchase.pending.list')->with('success','Data Save SuccessFully');
     }
