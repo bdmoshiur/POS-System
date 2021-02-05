@@ -45,6 +45,7 @@
                     <th>SL.</th>
                     <th>Supplier Name</th>
                     <th>Product Name</th>
+                    <th>Quantity</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -54,11 +55,11 @@
                     <tr>
                         <td>{{ $key+1 }}</td>
                         <td>{{ $purchase->supplier->name }}</td>
-                        <td>{{ $purchase->name }}</td>
+                        <td>{{ $purchase->product->name }}</td>
+                        <td>{{ $purchase->product->quantity }}</td>
                         <td>
-                            {{ $purchase->product->quantity }}
                             @if ($purchase->product->quantity < 20)
-                            <a class="btn btn-warning" href="{{ route('purchase.edit',$purchase->id) }}"><i class="fa fa-bars"> Apner purchase( {{ $purchase->product->quantity }} ) kome gasse joldi Purcess koren</i></a>
+                            <a class="btn btn-warning" href="{{ route('purchase.edit',$purchase->id) }}"><i class="fa fa-bars"> Apner Product( {{ $purchase->product->quantity }} ) kome gasse joldi Purcess koren</i></a>
                             @endif
                         </td>
                     </tr>

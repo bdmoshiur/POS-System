@@ -73,25 +73,20 @@ class PurchaseController extends Controller
     public function update(Request $request,$id){
         if($request->category_id == null){
             return redirect()->back()->with('error','Sorry! You do not select any item.');
-        }
-        else
-        {
-            $count_category = count($request->category_id);
-            for($i =0; $i < $count_category; $i++){
+        }else{
                 $purchase = Purchase::find($id);
-                $purchase->date = date('Y-m-d',strtotime($request->date[$i]));
-                $purchase->purchase_no = $request->purchase_no[$i];
-                $purchase->supplier_id = $request->supplier_id[$i];
-                $purchase->category_id = $request->category_id[$i];
-                $purchase->product_id = $request->product_id[$i];
-                $purchase->buying_qty = $request->buying_qty[$i];
-                $purchase->unit_price = $request->unit_price[$i];
-                $purchase->buying_price = $request->buying_price[$i];
-                $purchase->description = $request->description[$i];
+                $purchase->date = date('Y-m-d',strtotime($request->date));
+                $purchase->purchase_no = $request->purchase_no;
+                $purchase->supplier_id = $request->supplier_id;
+                $purchase->category_id = $request->category_id;
+                $purchase->product_id = $request->product_id;
+                $purchase->buying_qty = $request->buying_qty;
+                $purchase->unit_price = $request->unit_price;
+                $purchase->buying_price = $request->buying_price;
+                $purchase->description = $request->description;
                 $purchase->created_by = Auth::user()->id;
                 $purchase->status = '0';
                 $purchase->save();
-            }
         }
         return redirect()->route('purchase.pending.list')->with('success','Data Save SuccessFully');
     }

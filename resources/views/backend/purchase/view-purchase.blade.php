@@ -50,7 +50,7 @@
                             <th>Category</th>
                             <th>Product name</th>
                             <th>Description</th>
-                            <th>Quantity</th>
+                            <th>Buying Quantity</th>
                             <th>Unit Price</th>
                             <th>Buying Price</th>
                             <th>Status</th>
@@ -75,7 +75,6 @@
                                 <td>{{ $purchase->unit_price }}</td>
                                 <td>{{ $purchase->buying_price }}</td>
                                 <td>
-                                    {{-- <span>{{ ($purchase->status == '0') ? "Pending": "Approved" }}</span> --}}
                                     @if($purchase->status == '0')
                                         <span style="background: red; padding:5px">Pending</span>
                                     @elseif($purchase->status == '1')

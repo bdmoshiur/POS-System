@@ -48,7 +48,6 @@
                     <th>Category</th>
                     <th>Unit</th>
                     <th>Product Name</th>
-                    <th>Product status</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -61,13 +60,6 @@
                         <td>{{ $product->category->name }}</td>
                         <td>{{ $product->unit->name }}</td>
                         <td>{{ $product->name }}</td>
-                        <td>
-                            @if ( $product->quantity < 10 )
-                                low
-                            @else
-                                full
-                            @endif
-                        </td>
                         @php
                         $count_product = App\Model\Purchase::where('product_id',$product->id)->count();
                         @endphp

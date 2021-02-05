@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-group col-md-4">
                          <label>Purchase No</label>
-                         <input type="text" class="form-control form-control-sm" name="purchase_no" id="purchase_no" value="{{ $purchase->purchase_no }}">
+                         <input type="text" class="form-control form-control-sm" name="purchase_no" id="purchase_no" value="{{ $purchase->purchase_no }}" readonly>
                     </div>
                     <div class="form-group col-md-4">
                          <label>Supplier Name</label>
@@ -118,28 +118,28 @@
   <!-- /.content-wrapper -->
 <script id="document-template" type="text/x-handlebars-template">
   <tr class='delete_add_more_item' id='delete_add_more_item'>
-      <input type="hidden" name="date[]" value="@{{date}}">
-      <input type="hidden" name="purchase_no[]" value="@{{purchase_no}}">
-      <input type="hidden" name="supplier_id[]" value="@{{supplier_id}}">
+      <input type="hidden" name="date" value="@{{date}}">
+      <input type="hidden" name="purchase_no" value="@{{purchase_no}}">
+      <input type="hidden" name="supplier_id" value="@{{supplier_id}}">
       <td>
-        <input type="hidden" name="category_id[]" value="@{{category_id}}">
+        <input type="hidden" name="category_id" value="@{{category_id}}">
         @{{category_name}}
       </td>
       <td>
-        <input type="hidden" name="product_id[]" value="@{{product_id}}">
+        <input type="hidden" name="product_id" value="@{{product_id}}">
         @{{product_name}}
       </td>
       <td>
-        <input type="number" min="1" class="form-control form-control-sm text-right buying_qty" name="buying_qty[]" value="1">
+        <input type="number" min="1" class="form-control form-control-sm text-right buying_qty" name="buying_qty" value="1">
       </td>
       <td>
-        <input type="number" class="form-control form-control-sm text-right unit_price" name="unit_price[]" value="">
+        <input type="number" class="form-control form-control-sm text-right unit_price" name="unit_price" value="" required>
       </td>
       <td>
-        <input type="text" class="form-control form-control-sm" name="description[]">
+        <input type="text" class="form-control form-control-sm" name="description">
       </td>
       <td>
-        <input class="form-control form-control-sm text-right buying_price" name="buying_price[]" value="0" readonly>
+        <input class="form-control form-control-sm text-right buying_price" name="buying_price" value="0" readonly>
       </td>
       <td><i class="btn btn-danger btn-sm fa fa-window-close removeeventmore"></i></td>
   </tr>

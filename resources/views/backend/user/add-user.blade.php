@@ -47,6 +47,7 @@
                       <label for="usertype">User Role</label>
                         <select name="usertype" id="usertype" class="form-control">
                             <option value="">Select Role</option>
+                            <option value="admin">Super Admin</option>
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
                          </select>
@@ -88,7 +89,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+
   <script>
     $(function () {
       $('#myForm').validate({

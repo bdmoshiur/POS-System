@@ -47,8 +47,9 @@
                       <label for="usertype">User Role</label>
                         <select name="usertype" id="usertype" class="form-control">
                             <option value="">Select Role</option>
-                            <option value="Admin"{{($data->usertype =='Admin') ? 'selected' : '' }}>Admin</option>
-                            <option value="User"{{($data->usertype =='User') ? 'selected' : '' }} >User</option>
+                            <option value="Super Admin"{{($data->usertype =='admin') ? 'selected' : '' }}>Super Admin</option>
+                            <option value="Admin"{{($data->usertype =='admin') ? 'selected' : '' }}>Admin</option>
+                            <option value="User"{{($data->usertype =='user') ? 'selected' : '' }} >User</option>
                          </select>
                           <font style="color:red">{{ ($errors->has('usertype')) ? ($errors->first('usertype')):'' }}</font>
                     </div>

@@ -19,10 +19,9 @@ class UserController extends Controller
     }
 
     public function add(){
-
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
-       return view( 'backend.user.add-user',compact('totalQuantity'));
+       return view('backend.user.add-user',compact('totalQuantity'));
     }
 
     public function store(Request $request) {
