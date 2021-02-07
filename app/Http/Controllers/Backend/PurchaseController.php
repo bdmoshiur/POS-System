@@ -24,8 +24,16 @@ class PurchaseController extends Controller
         return view('backend.purchase.view-purchase',compact('allData','totalQuantity'));
     }
     public function add(){
-
         $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
+
+        $purchase_data = Purchase::orderBy('id','DESC')->first();
+        if($purchase_data == null){
+            $firstReg = 0;
+            $data['purchase_no'] = $firstReg + 1;
+        }else{
+            $purchase_data = Purchase::orderBy('id','DESC')->first()->purchase_no;
+            $data['purchase_no'] = $purchase_data + 1;
+        }
 
         $data['suppliers'] = Supplier::all();
         $data['categories'] = Category::all();

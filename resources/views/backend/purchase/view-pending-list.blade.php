@@ -36,7 +36,7 @@
               <div class="card-header">
                     <h3>
                         Pending Purchase List
-                        {{-- <a class="btn btn-success float-right btn-sm"  href="{{ route('purchase.add') }}"><i class="fa fa-plus-circle"></i> Add Purchase</a> --}}
+                        <a class="btn btn-success float-right btn-sm"  href="{{ route('purchase.view') }}"><i class="fa fa-list"></i> Purchase List</a>
                     </h3>
               </div><!-- /.card-header -->
               <div class="card-body">

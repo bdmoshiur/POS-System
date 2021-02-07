@@ -55,22 +55,22 @@
                     </div>
                     <div class="form-group col-md-4">
                       <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="form-control" name="name" placeholder="Your Name">
                         <font style="color:red">{{ ($errors->has('name')) ? ($errors->first('name')):'' }}</font>
                     </div>
                     <div class="form-group col-md-4">
                       <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" >
+                        <input type="email" class="form-control" name="email" placeholder="Your Email">
                          <font style="color:red">{{ ($errors->has('email')) ? ($errors->first('email')):'' }}</font>
                     </div>
                     <div class="form-group col-md-4">
                       <label for="password">Password</label>
-                        <input type="password" class="form-control" name="password" id="password">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                          <font style="color:red">{{ ($errors->has('password')) ? ($errors->first('password')):'' }}</font>
                     </div>
                     <div class="form-group col-md-4">
                       <label for="password">Confirm Password</label>
-                        <input type="password" class="form-control" name="password2">
+                        <input type="password" class="form-control" name="password2" placeholder="Confirm Password">
                          <font style="color:red">{{ ($errors->has('password2')) ? ($errors->first('password2')):'' }}</font>
                     </div>
                     <div class="form-group col-md-6">

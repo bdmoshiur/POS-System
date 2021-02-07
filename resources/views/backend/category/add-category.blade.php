@@ -45,7 +45,7 @@
                     <div class="form-row">
                     <div class="form-group col-md-6">
                          <label for="name">Category Name</label>
-                        <input type="text" class="form-control" name="name" >
+                        <input type="text" class="form-control" name="name" placeholder="Category Name">
                     </div>
                     <div class="form-group col-md-6" style="padding-top: 30px">
                         <input type="submit" class="btn btn-primary" value="Submit" >
@@ -74,7 +74,7 @@
             },
 
             messages: {
-               
+
 
             },
             errorElement: 'span',

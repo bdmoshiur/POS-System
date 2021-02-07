@@ -135,10 +135,10 @@
         <input type="number" min="1" class="form-control form-control-sm text-right buying_qty" name="buying_qty" value="1">
       </td>
       <td>
-        <input type="number" class="form-control form-control-sm text-right unit_price" name="unit_price" value="" required>
+        <input type="number" class="form-control form-control-sm text-right unit_price" name="unit_price" value="" required placeholder="Unit Price">
       </td>
       <td>
-        <input type="text" class="form-control form-control-sm" name="description">
+        <input type="text" class="form-control form-control-sm" name="description" placeholder="Descriptions">
       </td>
       <td>
         <input class="form-control form-control-sm text-right buying_price" name="buying_price" value="0" readonly>

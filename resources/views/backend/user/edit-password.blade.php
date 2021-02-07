@@ -44,16 +44,16 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                       <label for="current_password">Current Password</label>
-                        <input type="password" class="form-control" name="current_password" id="current_password">
+                        <input type="password" class="form-control" name="current_password" id="current_password" placeholder="Your Current Password">
                     </div>
                     <div class="form-group col-md-4">
                       <label for="new_password">New Password</label>
-                        <input type="password" class="form-control" name="new_password" id="new_password">
+                        <input type="password" class="form-control" name="new_password" id="new_password" placeholder="New Password">
 
                     </div>
                     <div class="form-group col-md-4">
                       <label for="again_new_password">Again New Password</label>
-                        <input type="password" class="form-control" name="again_new_password">
+                        <input type="password" class="form-control" name="again_new_password" placeholder="Again New Password">
 
                     </div>
                     <div class="form-group col-md-6">

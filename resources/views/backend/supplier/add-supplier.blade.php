@@ -45,19 +45,19 @@
                     <div class="form-row">
                     <div class="form-group col-md-6">
                          <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" >
+                        <input type="text" class="form-control" name="name" placeholder="Supplier Name">
                     </div>
                     <div class="form-group col-md-6">
                          <label for="mobile_no">Mobile</label>
-                        <input type="number" class="form-control" name="mobile_no" >
+                        <input type="number" class="form-control" name="mobile_no" placeholder="Supplier Phone Number">
                     </div>
                     <div class="form-group col-md-6">
                          <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" >
+                        <input type="email" class="form-control" name="email" placeholder="Supplier Email">
                     </div>
                     <div class="form-group col-md-6">
                          <label for="address">Address</label>
-                        <input type="text" class="form-control" name="address" >
+                        <input type="text" class="form-control" name="address" placeholder="Supplier Address">
                     </div>
                     <div class="form-group col-md-6" style="padding-top: 30px">
                         <input type="submit" class="btn btn-primary" value="Submit" >
@@ -96,7 +96,7 @@
             },
 
             messages: {
-               
+
 
             },
             errorElement: 'span',

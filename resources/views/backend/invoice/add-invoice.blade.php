@@ -94,7 +94,7 @@
                                 <tr>
                                     <td colspan="4" class="text-right">Discount</td>
                                     <td>
-                                        <input type="text" name="discount_amount" id="discount_amount" class="form-control form-control-sm text-right discount_amount" placeholder="Enter Discount Amount">
+                                        <input type="text" name="discount_amount" id="discount_amount" class="form-control form-control-sm discount_amount" placeholder="Discount Amount">
                                     </td>
                                 </tr>
                                 <tr>
@@ -121,7 +121,7 @@
                                         <option value="full_due">Full Due</option>
                                         <option value="partial_paid">Partial Paid</option>
                                     </select>
-                                    <input type="text" name="paid_amount" class="form-control form-control-sm paid_amount" placeholder="Enter Paid Amount" style="display: none">
+                                    <input type="text" name="paid_amount" class="form-control form-control-sm paid_amount" placeholder="Paid Amount" style="display: none">
                                 </div>
                                 <div class="form-group col-md-9">
                                     <label for="">Customer Name</label>
@@ -176,7 +176,7 @@
         <input type="number" min="1" class="form-control form-control-sm text-right selling_qty" name="selling_qty[]" value="1">
       </td>
       <td>
-        <input type="number" class="form-control form-control-sm text-right unit_price" name="unit_price[]" value="">
+        <input type="number" class="form-control form-control-sm text-right unit_price" name="unit_price[]" value="" placeholder="Unit Price">
       </td>
       <td>
         <input class="form-control form-control-sm text-right selling_price" name="selling_price[]" value="0" readonly>

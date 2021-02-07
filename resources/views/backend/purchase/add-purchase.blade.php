@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-group col-md-4">
                          <label>Purchase No</label>
-                         <input type="text" class="form-control form-control-sm" name="purchase_no" id="purchase_no" value="" placeholder="Enter Purchase no">
+                         <input type="text" class="form-control form-control-sm" name="purchase_no" id="purchase_no" value="{{ $purchase_no }}" style="background-color:#D8FD8A" readonly>
                     </div>
                     <div class="form-group col-md-4">
                          <label>Supplier Name</label>
@@ -136,10 +136,10 @@
         <input type="number" min="1" class="form-control form-control-sm text-right buying_qty" name="buying_qty[]" value="1">
       </td>
       <td>
-        <input type="number" class="form-control form-control-sm text-right unit_price" name="unit_price[]" value="">
+        <input type="number" class="form-control form-control-sm text-right unit_price" name="unit_price[]" value="" placeholder="Unit Price">
       </td>
       <td>
-        <input type="text" class="form-control form-control-sm" name="description[]">
+        <input type="text" class="form-control form-control-sm" name="description[]" placeholder="Descriptions">
       </td>
       <td>
         <input class="form-control form-control-sm text-right buying_price" name="buying_price[]" value="0" readonly>
