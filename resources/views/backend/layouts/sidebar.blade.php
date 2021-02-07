@@ -11,7 +11,7 @@ $route = Route::current()->getName();
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
-                Manage User
+                 Users
                 <i class="fas fa-angle-left right"></i>
             </p>
             </a>
@@ -30,7 +30,7 @@ $route = Route::current()->getName();
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
-                Manage Profile
+                 Profile
                 <i class="fas fa-angle-left right"></i>
             </p>
             </a>
@@ -53,7 +53,7 @@ $route = Route::current()->getName();
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
-                Manage Suppliers
+                 Suppliers
                 <i class="fas fa-angle-left right"></i>
             </p>
             </a>
@@ -70,7 +70,7 @@ $route = Route::current()->getName();
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
-                Manage Customers
+                 Customers
                 <i class="fas fa-angle-left right"></i>
             </p>
             </a>
@@ -105,7 +105,7 @@ $route = Route::current()->getName();
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
-                Manage Units
+                 Units
                 <i class="fas fa-angle-left right"></i>
             </p>
             </a>
@@ -122,7 +122,7 @@ $route = Route::current()->getName();
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
-                Manage Category
+                 Categorys
                 <i class="fas fa-angle-left right"></i>
             </p>
             </a>
@@ -139,7 +139,7 @@ $route = Route::current()->getName();
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
-                Manage Products
+                 Products
                 <i class="fas fa-angle-left right"></i>
             </p>
             </a>
@@ -157,7 +157,7 @@ $route = Route::current()->getName();
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
-                Manage Purchase
+                 Purchases
                 <i class="fas fa-angle-left right"></i>
             </p>
             </a>
@@ -187,7 +187,7 @@ $route = Route::current()->getName();
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
-                Manage Invoice
+                 Invoices
                 <i class="fas fa-angle-left right"></i>
             </p>
             </a>
@@ -223,7 +223,7 @@ $route = Route::current()->getName();
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
-                Manage Stock
+                 Stocks
                 <i class="fas fa-angle-left right"></i>
             </p>
             </a>
@@ -249,7 +249,7 @@ $route = Route::current()->getName();
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
-                Manage Auto Order
+                 Auto Orders
                 <i class="fas fa-angle-left right"></i>
             </p>
             </a>
