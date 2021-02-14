@@ -82,20 +82,20 @@ class PurchaseController extends Controller
         if($request->category_id == null){
             return redirect()->back()->with('error','Sorry! You do not select any item.');
         }else{
-                $purchase = Purchase::find($id);
-                $purchase->date = date('Y-m-d',strtotime($request->date));
-                $purchase->purchase_no = $request->purchase_no;
-                // $purchase->email = $request->email;
-                $purchase->supplier_id = $request->supplier_id;
-                $purchase->category_id = $request->category_id;
-                $purchase->product_id = $request->product_id;
-                $purchase->buying_qty = $request->buying_qty;
-                $purchase->unit_price = $request->unit_price;
-                $purchase->buying_price = $request->buying_price;
-                $purchase->description = $request->description;
-                $purchase->created_by = Auth::user()->id;
-                $purchase->status = '0';
-                $purchase->save();
+                // $purchase = Purchase::find($id);
+                // $purchase->date = date('Y-m-d',strtotime($request->date));
+                // $purchase->purchase_no = $request->purchase_no;
+                // // $purchase->email = $request->email;
+                // $purchase->supplier_id = $request->supplier_id;
+                // $purchase->category_id = $request->category_id;
+                // $purchase->product_id = $request->product_id;
+                // $purchase->buying_qty = $request->buying_qty;
+                // $purchase->unit_price = $request->unit_price;
+                // $purchase->buying_price = $request->buying_price;
+                // $purchase->description = $request->description;
+                // $purchase->created_by = Auth::user()->id;
+                // $purchase->status = '0';
+                // $purchase->save();
 
                 $data = array(
                 'email' => $request->email,
@@ -103,19 +103,21 @@ class PurchaseController extends Controller
                 'unit_price' => $request->unit_price,
                 'buying_price' => $request->buying_price,
                 'description' => $request->description,
+                'supplier_name' => $request->supplier_name,
+                'product_name' => $request->product_name,
 
                 );
 
                 Mail::send('backend.emails.contact', $data, function($message) use($data) {
-                    $message->from('moshiurcse888@gmail.com','Test email for POS system with WUB');
+                    $message->from('moshiurcse888@gmail.com','Auto Order');
                     $message->to($data['email']);
-                    $message->subject('Amader aro kisu Product lagbe');
+                    $message->subject('Auto Order for Product');
                 });
 
 
 
         }
-        return redirect()->route('purchase.pending.list')->with('success','Data Save SuccessFully');
+        return redirect()->route('home')->with('success','Email Sent SuccessFully');
     }
 
 

@@ -81,12 +81,6 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
 
-
-                @if ($totalQuantity < 20)
-                    <h2 class="alert alert-warning" role="alert">Your Product is low!</h2>
-                @endif
-
-
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">

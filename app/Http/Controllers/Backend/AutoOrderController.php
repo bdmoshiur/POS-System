@@ -11,13 +11,9 @@ class AutoOrderController extends Controller
 {
     public function view(){
         $totalQuantity = Product::where('status',1)->sum('quantity');
-
-        $allData = Purchase::all();
+        $allData = Product::all();
         return view('backend.autoorder.view-autoorder',compact('allData','totalQuantity'));
     }
-
-
-
 
 
 }

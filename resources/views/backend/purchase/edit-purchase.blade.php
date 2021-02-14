@@ -49,6 +49,8 @@
                          <label>Purchase No</label>
                          <input type="text" class="form-control form-control-sm" name="purchase_no" id="purchase_no" value="{{ $purchase->purchase_no }}" readonly>
                          <input type="hidden" class="form-control form-control-sm" name="email" id="email" value="{{ $purchase->supplier->email }}" >
+                         <input type="hidden" class="form-control form-control-sm" name="supplier_name" id="supplier_name" value="{{ $purchase->supplier->name }}" >
+                         <input type="hidden" class="form-control form-control-sm" name="product_name" id="product_name" value="{{ $purchase->product->name }}" >
                     </div>
                     <div class="form-group col-md-4">
                          <label>Supplier Name</label>
@@ -83,13 +85,14 @@
                                 <th>Product Name</th>
                                 <th width="7%">Pcs/Kg</th>
                                 <th width="10%">Unit Price</th>
-                                <th>Description</th>
+                                <th>Message</th>
                                 <th width="10%">Total Price</th>
                                 <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody id="addRow" class="addRow">
 
+                                
                             </tbody>
                             <tbody>
                                 <tr>
@@ -103,7 +106,7 @@
                         </table>
                             <br>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary" id="storeButton">Purchase Store</button>
+                            <button type="submit" class="btn btn-primary" id="storeButton">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -122,6 +125,8 @@
       <input type="hidden" name="date" value="@{{date}}">
       <input type="hidden" name="purchase_no" value="@{{purchase_no}}">
       <input type="hidden" name="email" value="@{{email}}">
+      <input type="hidden" name="supplier_name" value="@{{supplier_name}}">
+      <input type="hidden" name="product_name" value="@{{product_name}}">
       <input type="hidden" name="supplier_id" value="@{{supplier_id}}">
       <td>
         <input type="hidden" name="category_id" value="@{{category_id}}">
@@ -138,7 +143,7 @@
         <input type="number" class="form-control form-control-sm text-right unit_price" name="unit_price" value="" required placeholder="Unit Price">
       </td>
       <td>
-        <input type="text" class="form-control form-control-sm" name="description" placeholder="Descriptions">
+        <input type="text" class="form-control form-control-sm" name="description" placeholder="Message">
       </td>
       <td>
         <input class="form-control form-control-sm text-right buying_price" name="buying_price" value="0" readonly>
@@ -153,6 +158,8 @@
       var date = $("#date").val();
       var purchase_no = $('#purchase_no').val();
       var email = $('#email').val();
+      var supplier_name = $('#supplier_name').val();
+      var product_name = $('#product_name').val();
       var supplier_id = $('#supplier_id').val();
       var category_id = $('#category_id').val();
       var category_name = $('#category_id').find('option:selected').text();
@@ -187,6 +194,8 @@
         date:date,
         purchase_no:purchase_no,
         email:email,
+        supplier_name:supplier_name,
+        product_name:product_name,
         supplier_id:supplier_id,
         category_id:category_id,
         category_name:category_name,

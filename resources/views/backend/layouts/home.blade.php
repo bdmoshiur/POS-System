@@ -11,7 +11,8 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Dashboard</h1>
+            <h1 style="margin-bottom: 15px;" class="text-dark">Dashboard</h1>
+
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -20,6 +21,25 @@
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
+
+        <div class="row mb-2">
+            <div class="col-sm-12">
+
+              @foreach ($totalQuantity as $tQuantity)
+              @if ($tQuantity->quantity < 20)
+                  {{-- <h2 class="alert alert-warning" role="alert">Your Product is low!</h2> --}}
+                  <tr>
+                      <td>
+                          {{-- <a style="margin-bottom: 10px;" class="btn btn-warning"><i class="fa fa-bars"> Apner Product( {{ $tQuantity->name }}{{ $tQuantity->quantity }} ) kome gasse joldi Purcess koren</i></a> --}}
+                          <a style="margin-bottom: 10px;" class="btn btn-warning"><i class="fa fa-bars"> The {{ $tQuantity->name }} stock quantity is low. The remaining quantity is {{ $tQuantity->quantity }}</i></a>
+                      </td>
+                  </tr>
+              @endif
+          @endforeach
+
+            </div><!-- /.col -->
+
+          </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->

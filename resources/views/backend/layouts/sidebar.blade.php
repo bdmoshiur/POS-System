@@ -66,6 +66,8 @@ $route = Route::current()->getName();
                 </li>
             </ul>
       </li>
+
+
       <li class="nav-item has-treeview {{ ($prefix =='/customers')?'menu-open':''}}">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
@@ -101,6 +103,8 @@ $route = Route::current()->getName();
                 </li>
             </ul>
       </li>
+
+
       <li class="nav-item has-treeview {{ ($prefix =='/units')?'menu-open':''}}">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
@@ -249,7 +253,7 @@ $route = Route::current()->getName();
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
             <p>
-                 Auto Orders
+                 Auto Orders suggestion
                 <i class="fas fa-angle-left right"></i>
             </p>
             </a>
@@ -257,7 +261,7 @@ $route = Route::current()->getName();
                 <li class="nav-item">
                     <a href="{{ route('autoorder.view') }}" class="nav-link {{ ($route =='autoorder.view')?'active':''}}">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>View Auto Order</p>
+                    <p>View Auto Order List</p>
                     </a>
                 </li>
             </ul>

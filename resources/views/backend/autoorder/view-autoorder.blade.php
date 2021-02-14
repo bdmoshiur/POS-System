@@ -43,26 +43,26 @@
                   <thead>
                   <tr>
                     <th>SL.</th>
-                    <th>Supplier Name</th>
                     <th>Product Name</th>
+                    <th>Supplier Name</th>
                     <th>Quantity</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
 
-                      @foreach ($allData as $key => $purchase)
-                    <tr>
+                      @foreach ($allData as $key => $product)
+                      @if ($product->quantity < 20)
+                     <tr>
                         <td>{{ $key+1 }}</td>
-                        <td>{{ $purchase->supplier->name }}</td>
-                        <td>{{ $purchase->product->name }}</td>
-                        <td>{{ $purchase->product->quantity }}</td>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->supplier->name }}</td>
+                        <td>{{ $product->quantity }}</td>
                         <td>
-                            @if ($purchase->product->quantity < 20)
-                            <a class="btn btn-warning" href="{{ route('purchase.edit',$purchase->id) }}"><i class="fa fa-bars"> Apner Product( {{ $purchase->product->quantity }} ) kome gasse joldi Purcess koren</i></a>
-                            @endif
+                            <a class="btn btn-primary" href="{{ route('purchase.edit',$product->id) }}">Order Now</a>
                         </td>
                     </tr>
+                    @endif
                     @endforeach
                    </tbody>
                 </table>

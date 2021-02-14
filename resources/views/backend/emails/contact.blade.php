@@ -1,12 +1,14 @@
-<p>Your Details </p>
-    <div style="padding-left: 50px">
+<p>Hi {{ $supplier_name }}</p>
+<p>Hope you are doing well. I want to purchase product. Please look at the details below</p>
+    <div style="padding-left: 20px">
+        <p>Product Name: {{ $product_name }}</p>
         <p>Need Quantity: {{ $buying_qty }}</p>
         <p>Unit Price: {{ $unit_price }}</p>
-        <p>Buying Price: {{ $buying_price }}</p>
+        <p>Total Price: {{ $buying_price }}</p>
         <p>Message: {{ $description }}</p>
-        <p>Your Email: {{ $email }}</p>
+
     </div>
 
     <p>
-        <strong>Thanks</strong>
+        <strong>If you have any query please call us anytime <a href="tel:+8801773940587">01773940587</a></strong>
     </p>
