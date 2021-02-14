@@ -10,5 +10,5 @@
     </div>
 
     <p>
-        <strong>If you have any query please call us anytime <a href="tel:+8801773940587">01749302454/01773940587</a></strong>
+        <strong>If you have any query please call us anytime <a href="tel:+8801773940587">01773940587</a></strong>
     </p>
