@@ -108,7 +108,6 @@ Route::prefix('customers')->group(function () {
             Route::post('/store', 'Backend\PurchaseController@store')->name('purchase.store');
 
             Route::get('/edit/{id}', 'Backend\PurchaseController@edit')->name('purchase.edit');
-            Route::get('/update/{id}', 'Backend\PurchaseController@update')->name('purchase.update');
 
             Route::get('/pending', 'Backend\PurchaseController@pendingList')->name('purchase.pending.list');
             Route::get('/approve/{id}', 'Backend\PurchaseController@approve')->name('purchase.approve');
