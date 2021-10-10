@@ -69,7 +69,7 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => isset($DATABASE_URL['host']) ? $DATABASE_URL['host'] : null,
             'port' => isset($DATABASE_URL['port']) ? $DATABASE_URL['port'] : null,
-            'database' => isset($DATABASE_URL['host']) ? ltrim($DATABASE_URL['host'],'/') : null,
+            'database' => isset($DATABASE_URL['path']) ? ltrim($DATABASE_URL['path'],'/') : null,
             'username' => isset($DATABASE_URL['user']) ? $DATABASE_URL['user'] : null,
             'password' => isset($DATABASE_URL['pass']) ? $DATABASE_URL['pass'] : null,
             'charset' => 'utf8',
