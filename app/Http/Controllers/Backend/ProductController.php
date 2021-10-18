@@ -2,33 +2,31 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Model\Product;
-use App\Model\Supplier;
-use App\Model\Unit;
-use App\Model\Category;
 use Auth;
+use App\Model\Unit;
+use App\Model\Product;
+use App\Model\Category;
+use App\Model\Supplier;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
     public function view(){
-
         $totalQuantity = Product::where('status',1)->sum('quantity');
-
         $allData = Product::all();
+
         return view('backend.product.view-product',compact('allData','totalQuantity'));
     }
     public function add(){
-
         $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
-
         $data['suppliers'] = Supplier::all();
         $data['categories'] = Category::all();
         $data['units'] = Unit::all();
+
         return view('backend.product.add-product',$data);
     }
-    public function store(Request $request){
+    public function store(Request $request) {
         $product = new Product();
         $product->supplier_id = $request->supplier_id;
         $product->category_id = $request->category_id;
@@ -40,6 +38,7 @@ class ProductController extends Controller
 
         return redirect()->route('products.view')->with('success','Data Save SuccessFully');
     }
+
     public function edit($id){
 
         $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
@@ -50,7 +49,8 @@ class ProductController extends Controller
         $data['units'] = Unit::all();
         return view('backend.product.edit-product',$data);
     }
-    public function update(Request $request ,$id){
+
+    public function update(Request $request ,$id) {
         $product = Product::find($id);
         $product->supplier_id = $request->supplier_id;
         $product->category_id = $request->category_id;
@@ -61,9 +61,9 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('products.view')->with('success','Data Updated SuccessFully');
-
     }
-    public function delete($id){
+
+    public function delete($id) {
         $product = Product::find($id);
         $product->delete();
         return redirect()->route('products.view')->with('success','Data Delete SuccessFully');

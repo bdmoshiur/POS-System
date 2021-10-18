@@ -1,8 +1,6 @@
 @extends('backend.layouts.master')
 
 @section('content')
-
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -265,7 +263,6 @@
   });
 </script>
 
-
 <script>
     $(function () {
         $('#myForm').validate({
@@ -286,7 +283,6 @@
 
             messages: {
 
-
             },
             errorElement: 'span',
             errorPlacement: function (error, element) {
@@ -302,17 +298,10 @@
         });
     });
 </script>
-
-
-<script>
+    <script>
         $('.datepicker').datepicker({
             uiLibrary: 'bootstrap4',
             format : 'yyyy-mm-dd',
         });
     </script>
-
-
-
-
-
 @endsection

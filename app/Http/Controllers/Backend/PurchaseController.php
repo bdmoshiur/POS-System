@@ -2,35 +2,35 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Model\Product;
-use App\Model\Purchase;
-use App\Model\Supplier;
-use App\Model\Unit;
-use App\Model\Category;
-use Auth;
 use DB;
 use PDF;
+use Auth;
 use Mail;
+use App\Model\Unit;
+use App\Model\Product;
+use App\Model\Category;
+use App\Model\Purchase;
+use App\Model\Supplier;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PurchaseController extends Controller
 {
     public function view(){
-
         $totalQuantity = Product::where('status',1)->sum('quantity');
-
         $allData = Purchase::orderBy('date','desc')->orderBy('id','desc')->get();
+
         return view('backend.purchase.view-purchase',compact('allData','totalQuantity'));
     }
+
     public function add(){
         $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
-
         $purchase_data = Purchase::orderBy('id','DESC')->first();
+
         if($purchase_data == null){
             $firstReg = 0;
             $data['purchase_no'] = $firstReg + 1;
-        }else{
+        } else {
             $purchase_data = Purchase::orderBy('id','DESC')->first()->purchase_no;
             $data['purchase_no'] = $purchase_data + 1;
         }
@@ -39,13 +39,16 @@ class PurchaseController extends Controller
         $data['categories'] = Category::all();
         $data['units'] = Unit::all();
         $data['date'] = date('Y-m-d');
+
         return view('backend.purchase.add-purchase',$data);
     }
     public function store(Request $request){
+
         if($request->category_id == null){
             return redirect()->back()->with('error','Sorry! You do not select any item.');
-        }else{
+        } else {
             $count_category = count($request->category_id);
+
             for($i =0; $i < $count_category; $i++){
                 $purchase = new Purchase();
                 $purchase->date = date('Y-m-d',strtotime($request->date[$i]));
@@ -62,26 +65,28 @@ class PurchaseController extends Controller
                 $purchase->save();
             }
         }
+
         return redirect()->route('purchase.view')->with('success','Data Save SuccessFully');
     }
 
-
-    public function edit($id){
+    public function edit($id) {
         $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
-
         $data['suppliers'] = Supplier::find($id);
         $data['categories'] = Category::find($id);
         $data['units'] = Unit::find($id);
         $data['date'] = date('Y-m-d');
         $data['product'] = Product::find($id);
         $data['purchase'] = Purchase::find($id);
+
         return view('backend.purchase.edit-purchase',$data);
     }
 
-    public function update(Request $request,$id){
-        if($request->category_id == null){
+    public function update(Request $request,$id) {
+
+        if($request->category_id == null) {
+
             return redirect()->back()->with('error','Sorry! You do not select any item.');
-        }else{
+        } else {
                 // $purchase = Purchase::find($id);
                 // $purchase->date = date('Y-m-d',strtotime($request->date));
                 // $purchase->purchase_no = $request->purchase_no;
@@ -105,26 +110,16 @@ class PurchaseController extends Controller
                 'description' => $request->description,
                 'supplier_name' => $request->supplier_name,
                 'product_name' => $request->product_name,
-
                 );
-
                 Mail::send('backend.emails.contact', $data, function($message) use($data) {
                     $message->from('moshiurcse888@gmail.com','Auto Order');
                     $message->to($data['email']);
                     $message->subject('Auto Order for Product');
                 });
-
-
-
         }
+
         return redirect()->route('home')->with('success','Email Sent SuccessFully');
     }
-
-
-
-
-
-
 
     public function delete($id){
         $purchase = Purchase::find($id);
@@ -132,29 +127,29 @@ class PurchaseController extends Controller
         return redirect()->route('purchase.view')->with('success','Data Delete SuccessFully');
     }
 
-    public function pendingList(){
-
+    public function pendingList() {
         $totalQuantity = Product::where('status',1)->sum('quantity');
-
         $allData = Purchase::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
+
         return view('backend.purchase.view-pending-list',compact('allData','totalQuantity'));
     }
 
-    public function approve($id){
+    public function approve($id) {
         $purchase = Purchase::find($id);
         $product = Product::where('id',$purchase->product_id)->first();
         $purchase_qty = ((float)$purchase->buying_qty)+((float)$product->quantity);
         $product->quantity = $purchase_qty;
+
         if($product->save()){
             DB::table('purchases')
             ->where('id',$id)
             ->update(['status'=> 1]);
         }
+
         return redirect()->route('purchase.pending.list')->with('success','Data Approved SuccessFully');
     }
 
     public function purchaseReport(){
-
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         return view('backend.purchase.daily-purchase-report',compact('totalQuantity'));
@@ -168,10 +163,7 @@ class PurchaseController extends Controller
         $data['end_date'] = date('Y-m-d',strtotime($request->end_date));
         $pdf = PDF::loadView('backend.pdf.daily-purchase-report-pdf', $data);
         $pdf->SetProtection(['copy', 'print'], '', 'pass');
+
         return $pdf->stream('document.pdf');
-
     }
-
-
-
 }

@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Laravel Project Dashboard</title>
-
   <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="{{ asset('backend') }}/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -306,6 +305,5 @@
     $('.select2').select2();
    });
 </script>
-
 </body>
 </html>

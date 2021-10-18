@@ -1,5 +1,3 @@
-
-
 @php
 $prefix = Request::route()->getPrefix();
 $route = Route::current()->getName();
@@ -266,12 +264,6 @@ $route = Route::current()->getName();
                 </li>
             </ul>
          </li>
-
-
-
-
-
-
     </ul>
  </nav>
 

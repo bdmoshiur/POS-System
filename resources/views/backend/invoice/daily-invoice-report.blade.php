@@ -1,4 +1,5 @@
 @extends('backend.layouts.master')
+
 @section('content')
   <div class="content-wrapper">
     <div class="content-header">
@@ -51,7 +52,6 @@
     </section>
   </div>
 
-
   <script>
     $(function () {
         $('#myForm').validate({
@@ -82,9 +82,6 @@
         });
     });
 </script>
-
-
-
 
 <script>
         $('.datepicker').datepicker({

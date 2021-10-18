@@ -11,27 +11,22 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
     public function view(){
-
         $totalQuantity = Product::where('status',1)->sum('quantity');
-
         $id = Auth::User()->id;
         $user  = User::findOrfail($id);
+
         return view('backend.user.view-profile', compact('user','totalQuantity'));
     }
 
-      public function edit(){
-
+      public function edit() {
         $totalQuantity = Product::where('status',1)->sum('quantity');
-
         $id = Auth::User()->id;
         $editData  = User::findOrfail($id);
+
         return view('backend.user.edit-profile', compact('editData','totalQuantity'));
     }
 
-
-
-
-    public function update(Request $request){
+    public function update(Request $request) {
         $data = User::findOrfail(Auth::User()->id);
         $data->name = $request->name;
         $data->email = $request->email;
@@ -46,31 +41,30 @@ class ProfileController extends Controller
                 $file->move(public_path('upload/user_images/'), $fileName);
                 $data['image'] = $fileName;
             }
+
         $data->save();
+
         return redirect()->route('profiles.view')->with('success','Profiles updated Successfully');
 
     }
 
     public function PasswordView(){
-
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         return view('backend.user.edit-password',compact('totalQuantity'));
     }
 
+    public function PasswordUpdate(Request $request) {
 
-    public function PasswordUpdate(Request $request){
         if(Auth::attempt(['id' =>Auth::user()->id, 'password' => $request->current_password])){
             $user = User::findOrfail(Auth::user()->id);
              $user->password = bcrypt($request->new_password);
              $user->save();
+
              return redirect()->route('profiles.view')->with('success','Password Changed Successfully');
-        }else{
+        } else {
+
             return redirect()->back()->with('error','Sorry! your corrent password dost not match ');
         }
-
     }
-
-
-
 }

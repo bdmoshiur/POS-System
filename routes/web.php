@@ -30,7 +30,6 @@ Route::post('/password/update', 'Backend\ProfileController@passwordUpdate')->nam
 
 });
 
-
 // Suppliers Route
 Route::prefix('suppliers')->group(function () {
     Route::get('/view', 'Backend\SupplierController@view')->name('suppliers.view');
@@ -41,7 +40,6 @@ Route::prefix('suppliers')->group(function () {
     Route::get('/delete/{id}', 'Backend\SupplierController@delete')->name('suppliers.delete');
 
     });
-
 
 // Customers Route
 Route::prefix('customers')->group(function () {
@@ -59,8 +57,6 @@ Route::prefix('customers')->group(function () {
 
     Route::get('/paid', 'Backend\CustomerController@paidCustomer')->name('customers.paid');
     Route::get('/paid/pdf', 'Backend\CustomerController@paidCustomerPdf')->name('customers.paid.pdf');
-
-
 
     Route::get('/wise/report', 'Backend\CustomerController@CustomerWiseReport')->name('customers.wise.report');
     Route::get('/wise/credit/report', 'Backend\CustomerController@CustomerWiseCredit')->name('customers.wise.credit.report');
@@ -100,7 +96,6 @@ Route::prefix('customers')->group(function () {
             Route::get('/delete/{id}', 'Backend\ProductController@delete')->name('products.delete');
         });
 
-
          // Purchase Route
          Route::prefix('purchase')->group(function () {
             Route::get('/view', 'Backend\PurchaseController@view')->name('purchase.view');
@@ -121,8 +116,6 @@ Route::prefix('customers')->group(function () {
         Route::get('/get-product','Backend\DefaultController@getProduct')->name('get-product');
         Route::get('/get-stock','Backend\DefaultController@getStock')->name('check-product-stock');
 
-
-
         // invoice Route
         Route::prefix('invoice')->group(function () {
             Route::get('/view', 'Backend\InvoiceController@view')->name('invoice.view');
@@ -140,7 +133,6 @@ Route::prefix('customers')->group(function () {
 
         });
 
-
         //  Manage Stock Route
         Route::prefix('stock')->group(function () {
             Route::get('/report', 'Backend\StockController@stockReport')->name('stock.report');
@@ -151,15 +143,10 @@ Route::prefix('customers')->group(function () {
 
         });
 
-
           //  Manage Auto Order Route
             Route::prefix('autoorder')->group(function () {
             Route::get('/view', 'Backend\AutoOrderController@view')->name('autoorder.view');
 
         });
-
-
-
-
 });
 

@@ -29,7 +29,6 @@ class HomeController extends Controller
     {
         // $totalQuantity = Product::where('status',1)->sum('quantity');
         $totalQuantity = Product::all();
-
         $customers = Customer::where('status','1')->get()->count();
         $suppliers = Supplier::where('status','1')->get()->count();
         $products = Product::where('status','1')->get()->count();

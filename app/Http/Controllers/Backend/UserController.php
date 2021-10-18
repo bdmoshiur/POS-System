@@ -11,10 +11,9 @@ class UserController extends Controller
 {
 
     public function view() {
-
         $data['totalQuantity'] = Product::where('status',1)->sum('quantity');
-
         $data['allData'] = User::all();
+
         return view('backend.user.view-user', $data );
     }
 
@@ -25,7 +24,6 @@ class UserController extends Controller
     }
 
     public function store(Request $request) {
-
         $data = new User();
         $data->usertype = $request->usertype;
         $data->name = $request->name;
@@ -34,19 +32,14 @@ class UserController extends Controller
         $data->save();
 
         return redirect()->route('users.view')->with('success','Data Inserted Successfully');
-
     }
-
 
      public function edit($id){
+        $totalQuantity = Product::where('status',1)->sum('quantity');
+        $data = User::findOrfail($id);
 
-            $totalQuantity = Product::where('status',1)->sum('quantity');
-
-            $data = User::findOrfail($id);
-           return view('backend.user.edit-user',compact('data','totalQuantity'));
-
+        return view('backend.user.edit-user',compact('data','totalQuantity'));
     }
-
 
     public function update(Request $request, $id ){
         $data = User::findOrfail($id);
@@ -56,22 +49,17 @@ class UserController extends Controller
         $data->save();
 
         return redirect()->route('users.view')->with('success','Data updated Successfully');
-
     }
 
     public function delete($id){
-
         $data = User::findOrfail($id);
+
         if(file_exists('upload/user_images/' . $data->image) AND ! empty($data->image)){
             unlink('upload/user_images/' . $data->image);
         }
+
         $data->delete();
+
        return redirect()->route('users.view')->with('success','Data Deleted Successfully');
     }
-
-
-
-
-
-
 }

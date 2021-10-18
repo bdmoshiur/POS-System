@@ -17,11 +17,13 @@ class CategoryController extends Controller
         $allData = Category::all();
         return view('backend.category.view-category',compact('allData','totalQuantity'));
     }
+    
     public function add(){
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         return view('backend.category.add-category',compact('totalQuantity'));
     }
+
     public function store(Request $request){
         $category = new Category();
         $category->name = $request->name;
@@ -30,12 +32,14 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.view')->with('success','Data Save SuccessFully');
     }
+
     public function edit($id){
         $totalQuantity = Product::where('status',1)->sum('quantity');
 
         $editData = Category::find($id);
         return view('backend.category.edit-category',compact('editData','totalQuantity'));
     }
+
     public function update(Request $request ,$id){
         $category = Category::find($id);
         $category->name = $request->name;
@@ -45,6 +49,7 @@ class CategoryController extends Controller
         return redirect()->route('categories.view')->with('success','Data Updated SuccessFully');
 
     }
+
     public function delete($id){
         $category = Category::find($id);
         $category->delete();

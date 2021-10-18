@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Model\Product;
+use App\Model\Purchase;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Purchase;
 
 class AutoOrderController extends Controller
 {
@@ -14,6 +14,4 @@ class AutoOrderController extends Controller
         $allData = Product::all();
         return view('backend.autoorder.view-autoorder',compact('allData','totalQuantity'));
     }
-
-
 }
